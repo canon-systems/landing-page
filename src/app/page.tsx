@@ -1,711 +1,610 @@
 import type { Metadata } from 'next';
-import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import {
+  ArrowRight,
+  BrainCircuit,
+  CalendarDays,
+  Check,
+  CircleCheck,
+  Clock3,
+  FileCheck2,
+  Flag,
+  LockKeyhole,
+  MessageSquare,
+  Radar,
+  ShieldCheck,
+  Sparkles,
+  UserRoundCheck,
+  Zap,
+} from 'lucide-react';
 
 import { AnimateIn } from '@/components/AnimateIn';
 import { FaqAccordion } from '@/components/landing-page/FaqAccordion';
-import { ProductTour } from '@/components/landing-page/ProductTour';
-import { IntegrationLogos } from '@/components/IntegrationLogos';
+import { IntegrationLogos, type IntegrationProvider } from '@/components/IntegrationLogos';
 import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 
 const requestAccessHref = 'https://app.usecanon.com';
+const inner = 'mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8';
 
 export const metadata: Metadata = {
-  title: 'Canon | Technical GTM Readiness Platform',
+  title: 'Readiness That Keeps Up With Your Product',
   description:
-    'Canon gets new hires customer-ready faster and keeps field teams current as products, pricing, positioning, and processes change.',
+    'Canon turns live team context into role-specific ramp plans, meeting briefings, readiness actions, and verified progress for Technical GTM teams.',
   openGraph: {
-    title: 'Canon | Technical GTM Readiness Platform',
+    title: 'Canon | Readiness that keeps up with your product',
     description:
-      'Canon gets new hires customer-ready faster and keeps field teams current as products, pricing, positioning, and processes change.',
+      'Connect the context your team already creates. Canon prepares the next customer moment and proves who is ready for it.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Canon | Technical GTM Readiness Platform',
+    title: 'Canon | Readiness that keeps up with your product',
     description:
-      'Canon gets new hires customer-ready faster and keeps field teams current as products, pricing, positioning, and processes change.',
+      'Connect the context your team already creates. Canon prepares the next customer moment and proves who is ready for it.',
   },
 };
 
-// ── Data ──────────────────────────────────────────────────────────────────────
+const integrations: Array<{
+  provider: IntegrationProvider;
+  name: string;
+  role: string;
+  description: string;
+  tone: string;
+}> = [
+    {
+      provider: 'granola',
+      name: 'Granola',
+      role: 'Meeting context',
+      description: 'Turn meeting notes and transcripts into customer themes, proof, and follow-up context.',
+      tone: 'integration-granola',
+    },
+    {
+      provider: 'gmail',
+      name: 'Gmail',
+      role: 'Email context',
+      description: 'Connect the customer and team conversations that shape the work ahead.',
+      tone: 'integration-gmail',
+    },
+    {
+      provider: 'google_calendar',
+      name: 'Google Calendar',
+      role: 'Upcoming work',
+      description: 'Know which meetings are next, who is involved, and when a briefing is needed.',
+      tone: 'integration-calendar',
+    },
+    {
+      provider: 'outlook',
+      name: 'Outlook Calendar',
+      role: 'Meeting timing',
+      description: 'Prepare people for upcoming meetings across Microsoft calendars.',
+      tone: 'integration-outlook',
+    },
+    {
+      provider: 'slack',
+      name: 'Slack',
+      role: 'Communication + delivery',
+      description: 'Bring in team context and route the next action to the communication space your team already uses.',
+      tone: 'integration-slack',
+    },
+  ];
 
-const statusCards = [
+const operatingLoop = [
   {
-    eyebrow: 'Hire Progress',
-    title: 'Jordan hit 3 of 5 milestones in week two',
-    detail: 'Discovery & Qualification and Competitive Positioning complete. Next: Technical Demo Certification.',
-    value: '3/5',
-    tone: 'emerald',
+    number: '01',
+    title: 'Connect context',
+    body: 'Choose the conversations, meetings, email, and calendars Canon should learn from.',
+    icon: BrainCircuit,
   },
   {
-    eyebrow: 'Readiness Gap',
-    title: 'Pricing update: 5 reps on active deals not current',
-    detail: "Confluence changes detected across 3 docs. Five reps with open opportunities haven't reviewed the new packaging.",
-    value: '5 gaps',
-    tone: 'amber',
+    number: '02',
+    title: 'Shape the path',
+    body: 'Turn company context into role-specific learning steps, success signals, and ramp timing.',
+    icon: Flag,
   },
   {
-    eyebrow: 'Knowledge Sync',
-    title: 'Gong analysis synced to onboarding briefs',
-    detail: 'Top-performer call patterns and two new objection responses added. All open briefs updated automatically.',
-    value: 'Synced',
-    tone: 'purple',
+    number: '03',
+    title: 'Prepare the moment',
+    body: 'Brief people before the meeting, milestone, or customer situation where readiness matters.',
+    icon: CalendarDays,
   },
-] as const;
-
-const rampLoop = [
-  { step: '01', title: 'Connect knowledge', body: 'Link Confluence, Gong, Slack, GitHub, and more. Canon keeps context current as sources update so briefs never go stale.' },
-  { step: '02', title: 'Define milestones', body: 'Set role-specific capability checkpoints. Every hire gets a structured path from day one, not a generic onboarding deck.' },
-  { step: '03', title: 'Launch the hire path', body: 'Add a new hire and Canon generates their brief, assigns milestones, and creates their access request list automatically.' },
-  { step: '04', title: 'Monitor readiness', body: 'When product or market changes create gaps, Canon surfaces who is affected, for new hires and the broader team alike.' },
+  {
+    number: '04',
+    title: 'Find the proof',
+    body: 'Check connected activity for evidence and send uncertain proof to a manager for review.',
+    icon: FileCheck2,
+  },
+  {
+    number: '05',
+    title: 'Route what is next',
+    body: 'Deliver the right update or action to the right person in the communication tool your team already uses, then keep the loop moving.',
+    icon: Zap,
+  },
 ];
 
-const productTourLayers = [
+const productStories = [
   {
-    stage: 'Home',
-    title: 'See team readiness in one place.',
-    description:
-      'The home view gives managers a live operating surface for new hire progress, field readiness gaps, and the work Canon is doing behind the scenes.',
-    image: '/home.png',
-    alt: 'Canon home dashboard showing ramp progress and field readiness status.',
-    highlights: ['Team readiness', 'Live gaps', 'Manager cockpit'],
-  },
-  {
-    stage: 'New hire',
-    title: 'Get new hires customer-ready faster.',
-    description:
-      'Add a hire, choose the role context, and Canon turns connected company knowledge into a readiness path before they face customers.',
+    eyebrow: 'Hire paths',
+    title: 'Guide every hire through the work that proves readiness.',
+    body:
+      'Launch a role-specific path with timed learning steps, tool access, live Canon Checks, and manager review in one operating view.',
     image: '/new_hire.png',
-    alt: 'Canon new hire setup screen for creating a readiness path.',
-    highlights: ['Role context', 'Ramp path', 'Customer-ready'],
+    alt: 'Canon Hire Paths showing Maya Chen’s AI Solutions Architect ramp, milestone progress, Canon Checks, and proof of progress.',
+    bullets: ['Role-specific paths and ramp timing', 'Live Canon Checks and evidence status', 'Tool access and manager review'],
+    accent: 'purple',
   },
   {
-    stage: 'Milestones',
-    title: 'Measure readiness, not task completion.',
-    description:
-      'Milestones define the capabilities, real work triggers, and success signals that prove whether someone is ready to operate in the field.',
+    eyebrow: 'Milestones + evidence',
+    title: 'Turn role expectations into an approved readiness plan.',
+    body:
+      'Define the trigger, proof, timing, and dependency behind each learning step so managers can see what real progress should look like.',
     image: '/milestones.png',
-    alt: 'Canon milestones screen showing readiness checkpoint progress.',
-    highlights: ['Capabilities', 'Proof of readiness', 'Shared expectations'],
+    alt: 'Canon Milestones showing the AI Solutions Architect approved plan with timed learning steps, triggers, proof requirements, and dependencies.',
+    bullets: ['Generated role plans with human approval', 'Real-work triggers and dependencies', 'Clear proof requirements'],
+    accent: 'green',
   },
   {
-    stage: 'Knowledge',
-    title: 'Keep readiness grounded in current knowledge.',
-    description:
-      'Canon pulls from connected product docs, calls, Slack conversations, and technical sources so the field is trained on what is true now.',
-    image: '/knowledge.png',
-    alt: 'Canon knowledge screen showing connected source material.',
-    highlights: ['Connected sources', 'Fresh context', 'No stale decks'],
-  },
-  {
-    stage: 'Readiness',
-    title: 'Catch stale field knowledge before customers do.',
-    description:
-      'When product, pricing, or positioning changes, Canon surfaces who is affected so teams can act before outdated information reaches a customer conversation.',
+    eyebrow: 'Readiness updates',
+    title: 'Turn a detected change into the right field action.',
+    body:
+      'Canon explains what changed, why it matters, who needs to know, and the action that should happen before outdated context reaches a customer.',
     image: '/readiness.png',
-    alt: 'Canon readiness screen showing field readiness gaps and updates.',
-    highlights: ['Gap detection', 'Change monitoring', 'Field alerts'],
+    alt: 'Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action.',
+    bullets: ['Change and impact detection', 'Role-specific audience targeting', 'Recommended action and delivery'],
+    accent: 'amber',
+  },
+  {
+    eyebrow: 'Meeting briefings',
+    title: 'Prepare the team before the next customer meeting.',
+    body:
+      'The Briefings pane watches the connected calendar, surfaces upcoming meetings, and tracks whether each briefing is waiting, delivered, or needs attention.',
+    image: '/briefing.png',
+    alt: 'Canon Meeting Briefings showing an Outlook Calendar connection, an upcoming customer meeting, delivered briefings, and one item needing attention.',
+    bullets: ['Connected calendar awareness', 'Upcoming meeting preparation', 'Waiting, delivered, and attention states'],
+    accent: 'purple',
+  },
+  {
+    eyebrow: 'Knowledge',
+    title: 'Keep the source material behind every recommendation visible.',
+    body:
+      'Canon shows the meeting libraries and team context it can use, how much knowledge is ready, and when each source was last updated.',
+    image: '/knowledge.png',
+    alt: 'Canon Knowledge showing three active Granola sources and 141 items ready for Canon to use.',
+    bullets: ['Source health and update history', 'Customer and product context in one place', 'Clear visibility into what Canon can use'],
+    accent: 'green',
+  },
+  {
+    eyebrow: 'Roles + tools',
+    title: 'Give every role the tools and context it needs to operate.',
+    body:
+      'Canon keeps role expectations and the systems behind them together, so every hire starts with the right access path and a clear owner.',
+    image: '/roles.png',
+    alt: 'Canon Settings showing the Roles & Tools catalog with three Technical GTM roles and their configured tools.',
+    bullets: ['Role-specific tool mapping', 'Clear owners for every request', 'One readiness foundation'],
+    accent: 'amber',
+  },
+  {
+    eyebrow: 'Communication delivery',
+    title: 'Put the next readiness action where the team already works.',
+    body:
+      'Canon routes access requests and follow-up actions into connected communication tools with the right context and a manager-controlled approval path. The current visual shows one example of that flow in Slack.',
+    image: '/slack_delivery.png',
+    alt: 'Canon’s Slack delivery surface showing access requests with links to Zoom, Gong, and GitHub and manager approval actions.',
+    bullets: ['Context-rich access requests', 'Deep links to the work', 'Manager-controlled approvals'],
+    accent: 'purple',
   },
 ] as const;
-
-const statsData = [
-  {
-    stat: '9–12 mo',
-    gradient: 'text-gradient-purple',
-    label: 'Average ramp time',
-    body: "Industry average for an enterprise Technical GTM hire to reach full productivity. Most teams treat this as a fixed cost. It isn't.",
-    source: 'Bridge Group, GTM benchmark consensus',
-    sourceUrl: 'https://salesso.com/blog/sales-ramp-up-statistics-2025-benchmarks-best-practices/',
-    accent: 'var(--canon-purple)',
-  },
-  {
-    stat: '78%',
-    gradient: 'text-gradient-amber',
-    label: 'Missed quota in 2025',
-    body: 'Sellers who fell short last year, up from 69% in 2024. Poor ramp and stale field readiness are among the leading contributors.',
-    source: 'Ebsta x Pavilion, 2025 GTM Benchmarks',
-    sourceUrl: 'https://benchmarks.ebsta.com/2025-gtm-benchmarks',
-    accent: 'var(--amber)',
-  },
-  {
-    stat: 'Day 1',
-    gradient: 'text-gradient-green',
-    label: 'When Canon starts',
-    body: 'Briefs are live before the hire walks in. And they keep updating as your product and market change.',
-    source: null,
-    sourceUrl: null,
-    accent: 'var(--green)',
-  },
-];
-
-const features = [
-  {
-    kicker: 'Onboarding',
-    title: 'Knowledge-grounded from day one.',
-    body: 'Every brief draws from live sources (Confluence, Gong, Slack, GitHub), so the hire is working with current context, not a snapshot from last quarter.',
-    accent: 'var(--canon-purple)',
-    accentClass: 'bg-[var(--canon-purple)]',
-  },
-  {
-    kicker: 'Progress',
-    title: 'Milestones that mean something.',
-    body: 'Role-specific capability checkpoints give hire and manager a clear, shared view of progress, not just activity. You always know who is ready for what.',
-    accent: 'var(--green)',
-    accentClass: 'bg-[var(--green)]',
-  },
-  {
-    kicker: 'Readiness',
-    title: 'Current after the first week, too.',
-    body: 'Canon detects product and market changes and surfaces who is affected, for new hires still ramping and for the broader team already in the field.',
-    accent: 'var(--amber)',
-    accentClass: 'bg-[var(--amber)]',
-  },
-];
-
-const integrations = [
-  { icon: <IntegrationLogos provider="confluence" size={22} />, name: 'Confluence', body: 'Sync product docs, messaging guides, and playbooks as live knowledge sources.' },
-  { icon: <IntegrationLogos provider="gong" size={22} />, name: 'Gong', body: 'Pull top-performer call patterns and objection responses into onboarding briefs.' },
-  { icon: <IntegrationLogos provider="slack" size={22} />, name: 'Slack', body: 'Deliver onboarding updates and readiness alerts where your team already works.' },
-  { icon: <IntegrationLogos provider="github" size={22} />, name: 'GitHub', body: 'Connect technical docs and changelogs so product updates flow into field readiness.' },
-];
 
 const faqItems = [
-  { question: 'What does Canon actually do?', answer: 'Canon builds personalized onboarding paths for Technical GTM hires, drawing from your live knowledge sources, and then monitors for product and market changes that could create readiness gaps after onboarding ends. The result is shorter time to productivity and a field team that stays current without manual enablement work.' },
-  { question: 'Who is Canon built for?', answer: 'Canon is built for Technical GTM teams: Solutions Engineers, Sales Engineers, Technical Account Managers, and the managers and enablement leaders who ramp and support them.' },
-  { question: 'How does readiness work after onboarding ends?', answer: 'Canon continues to watch your connected knowledge sources. When it detects a meaningful change (a new pricing model in Confluence, a product update in GitHub, a shift in competitive positioning), it surfaces who is affected and updates the relevant briefs so leaders can act before gaps reach the field.' },
-  { question: 'What knowledge sources does Canon connect to?', answer: 'Canon currently connects to Confluence, Gong, Slack, and GitHub. Additional sources are in progress. If your stack is not listed, reach out at john@usecanon.com and we will let you know what is coming.' },
-  { question: 'How long does setup take?', answer: 'Most teams are connected, milestones defined, and the first hire launched within a single session. No custom implementation or dedicated IT project required.' },
-  { question: 'Is my data secure?', answer: 'Yes. Canon uses OAuth for all integrations, encrypts tokens at rest, and only reads from explicitly connected sources. Canon never writes to your tools.' },
-];
+  {
+    question: 'What does Canon actually do?',
+    answer:
+      'Canon connects to the context your team already creates, turns it into role-specific ramp plans and meeting briefings, detects readiness gaps, and checks for evidence that people can do the work. The next action is routed through the communication tool your team already uses so readiness stays part of the daily workflow.',
+  },
+  {
+    question: 'Who is Canon built for?',
+    answer:
+      'Canon is built for Technical GTM teams, including Solutions Engineers, Solutions Architects, Implementation roles, Technical Account Managers, and the leaders responsible for getting them ready for customer work.',
+  },
+  {
+    question: 'Which tools does Canon connect with today?',
+    answer:
+      'Canon currently connects with Slack, Granola, Gmail, Google Calendar, and Outlook Calendar. Additional communication tools, including Google Chat and Teams, are part of the planned integration surface. Each connection has a specific job: bringing in context, understanding upcoming work, finding evidence, or delivering the next action.',
+  },
+  {
+    question: 'Does Canon replace our LMS or CRM?',
+    answer:
+      'No. Canon focuses on the readiness loop between changing company context and customer-facing work. It complements the systems you already use by preparing people for real work and showing whether the right capability is present.',
+  },
+] as const;
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-type StatusTone = (typeof statusCards)[number]['tone'];
-
-function toneStyles(tone: StatusTone) {
-  if (tone === 'amber') return { shell: { border: '1px solid var(--amber-border)', backgroundColor: 'var(--amber-bg)' }, eyebrow: { color: 'var(--amber-text)' }, value: { color: 'var(--amber-text)' } };
-  if (tone === 'purple') return { shell: { border: '1px solid var(--canon-purple-border)', backgroundColor: 'var(--canon-purple-light)' }, eyebrow: { color: 'var(--canon-purple)' }, value: { color: 'var(--canon-purple)' } };
-  return { shell: { border: '1px solid var(--green-border)', backgroundColor: 'var(--green-bg)' }, eyebrow: { color: 'var(--green-text)' }, value: { color: 'var(--green-text)' } };
+function IntegrationPill({ provider, name }: { provider: IntegrationProvider; name: string }) {
+  return (
+    <div className="integration-pill">
+      <IntegrationLogos provider={provider} size={17} />
+      <span>{name}</span>
+    </div>
+  );
 }
 
-const inner = 'mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8';
-
-// ── Page ──────────────────────────────────────────────────────────────────────
+function SectionHeading({
+  eyebrow,
+  title,
+  body,
+  align = 'left',
+}: {
+  eyebrow: string;
+  title: string;
+  body?: string;
+  align?: 'left' | 'center';
+}) {
+  return (
+    <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl'}>
+      <p className="section-eyebrow">{eyebrow}</p>
+      <h2 className="type-landing-h2 mt-4">{title}</h2>
+      {body ? <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">{body}</p> : null}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen" style={{ color: 'var(--text-primary)' }}>
+    <div className="min-h-screen overflow-x-clip bg-[var(--bg-page)] text-[var(--text-primary)]">
       <Navigation />
 
       <main>
+        <section className="hero-section relative overflow-hidden">
+          <div className="hero-grid pointer-events-none absolute inset-0" />
+          <div className="hero-ambient pointer-events-none absolute inset-0" />
 
-        {/* ═══════════════════════════════════════════════════════════
-            HERO
-            ─ Centered layout, dot-grid + purple ambient glow bg
-            ─ Staggered CSS animations on load (no IntersectionObserver
-              needed — these are above the fold)
-        ═══════════════════════════════════════════════════════════ */}
-        <section className="relative overflow-hidden text-center">
-          {/* Dot-grid + glow layers */}
-          <div className="hero-dot-grid pointer-events-none absolute inset-0" />
-          <div className="hero-glow pointer-events-none absolute inset-0" />
+          <div className={`${inner} relative grid min-h-[calc(100svh-65px)] items-center gap-12 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14 lg:py-20`}>
+            <div className="max-w-[39rem]">
+              <div className="hero-kicker" style={{ animation: 'fade-up 0.55s ease 0.05s both' }}>
+                <span className="hero-kicker-dot" />
+                Readiness system for Technical GTM
+              </div>
 
-          <div className={`${inner} relative pt-20 pb-10 lg:pt-28 lg:pb-12`}>
+              <h1 className="type-landing-hero mt-6" style={{ animation: 'fade-up 0.6s ease 0.13s both' }}>
+                Turn what changed into{' '}
+                <span className="text-gradient-purple">what your team does next.</span>
+              </h1>
 
-            {/* Badge */}
-            <div style={{ animation: 'fade-up 0.55s ease 0.05s both' }}>
-              <span className="badge-hero">
-                <span className="live-dot relative inline-block h-1.5 w-1.5 rounded-full bg-[var(--canon-purple)]" />
-                Technical GTM Readiness Platform
-              </span>
-            </div>
-
-            {/* H1 */}
-            <h1
-              className="type-landing-hero mx-auto mt-6 max-w-3xl"
-              style={{
-                color: 'var(--text-primary)',
-                animation: 'fade-up 0.6s ease 0.15s both',
-              }}
-            >
-              Keep Technical GTM teams<br />
-              <span className="text-gradient-purple">customer-ready.</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className="mx-auto mt-6 max-w-xl text-base leading-7"
-              style={{ color: 'var(--text-secondary)', animation: 'fade-up 0.6s ease 0.25s both' }}
-            >
-              Your product changes faster than your field team can keep up. Canon keeps new hires and current teams customer-ready before stale information reaches a customer call.
-            </p>
-
-            {/* CTAs */}
-            <div
-              className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
-              style={{ animation: 'fade-up 0.6s ease 0.35s both' }}
-            >
-              <Button size="lg" className="btn-primary-shimmer" asChild>
-                <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
-                  Get Access
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button size="lg" variant="secondary" asChild>
-                <a href="#product-tour">See the product</a>
-              </Button>
-            </div>
-
-            {/* Works-with strip */}
-            <div
-              className="mt-8 flex items-center justify-center gap-2 flex-wrap"
-              style={{ animation: 'fade-up 0.6s ease 0.45s both' }}
-            >
-              <span className="type-kicker mr-2">Works with</span>
-              {[
-                { label: 'Confluence', icon: <IntegrationLogos provider="confluence" size={14} /> },
-                { label: 'Gong', icon: <IntegrationLogos provider="gong" size={14} /> },
-                { label: 'Slack', icon: <IntegrationLogos provider="slack" size={14} className="text-[var(--text-tertiary)]" /> },
-                { label: 'GitHub', icon: <IntegrationLogos provider="github" size={14} className="text-[var(--text-tertiary)]" /> },
-              ].map((item) => (
-                <span
-                  key={item.label}
-                  className="flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px]"
-                  style={{ borderColor: 'var(--border-tertiary)', backgroundColor: 'rgba(255,255,255,0.03)', color: 'var(--text-tertiary)' }}
-                >
-                  {item.icon}
-                  {item.label}
-                </span>
-              ))}
-              <span className="text-xs ml-1" style={{ color: 'var(--text-tertiary)' }}>+ more</span>
-            </div>
-          </div>
-
-          {/* ── Product preview panel ── */}
-          <div
-            className={`${inner} pb-24 lg:pb-32`}
-            style={{ animation: 'fade-up 0.7s ease 0.55s both' }}
-          >
-            <div
-              className="preview-panel card-hover mt-4 w-full overflow-hidden rounded-[14px] border text-left"
-              style={{
-                borderColor: 'var(--border-secondary)',
-                boxShadow: '0 0 0 1px rgba(107,92,231,0.08), 0 32px 80px rgba(0,0,0,0.55)',
-              }}
-            >
-              {/* Window chrome */}
-              <div
-                className="flex items-center gap-3 border-b px-5 py-3"
-                style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-tertiary)' }}
+              <p
+                className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
+                style={{ animation: 'fade-up 0.6s ease 0.21s both' }}
               >
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'var(--border-secondary)' }} />
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'var(--border-secondary)' }} />
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'var(--border-secondary)' }} />
-                </div>
-                <div className="flex items-center gap-2 ml-2">
-                  {/* Pulsing live dot */}
-                  <span className="relative flex h-2 w-2">
-                    <span className="live-dot-ring live-dot absolute inline-flex h-full w-full rounded-full" style={{ color: 'var(--green-text)', backgroundColor: 'var(--green-text)' }} />
-                    <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--green-text)' }} />
+                Canon turns live team context into ramp plans, meeting briefings, and verified readiness. Then it routes the next action through the communication tool your team already uses.
+              </p>
+
+              <div
+                className="mt-8 flex flex-col gap-3 sm:flex-row"
+                style={{ animation: 'fade-up 0.6s ease 0.29s both' }}
+              >
+                <Button size="lg" className="btn-primary-shimmer" asChild>
+                  <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
+                    Get access
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button size="lg" variant="secondary" asChild>
+                  <a href="#product-tour">Explore the product</a>
+                </Button>
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-[var(--text-tertiary)]" style={{ animation: 'fade-up 0.6s ease 0.37s both' }}>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Role-specific</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Evidence-aware</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Manager-controlled</span>
+              </div>
+            </div>
+
+            <div className="relative" style={{ animation: 'fade-up 0.7s ease 0.2s both' }}>
+              <div className="hero-media-glow pointer-events-none absolute inset-x-[8%] bottom-[-4%] h-[45%]" />
+              <div className="hero-media relative">
+                <div className="hero-media-bar">
+                  <div className="flex items-center gap-2">
+                    <span className="window-dot bg-[#ff6258]" />
+                    <span className="window-dot bg-[#ffbd2e]" />
+                    <span className="window-dot bg-[#27c840]" />
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] text-[var(--text-tertiary)]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--green-text)]" />
+                    Seeded workspace
                   </span>
-                  <span className="type-kicker">Canon · Live team view</span>
+                </div>
+
+                <div className="hero-media-stage">
+                  <Image
+                    src="/readiness.png"
+                    alt="Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action."
+                    width={1920}
+                    height={1440}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
+                </div>
+
+                <div className="hero-media-footer">
+                  <span>Signal detected</span>
+                  <span className="hero-media-line" />
+                  <span>Audience identified</span>
+                  <span className="hero-media-line" />
+                  <span>Action routed</span>
                 </div>
               </div>
-              {/* Status cards — 3-across, divided by 1px gaps */}
-              <div
-                className="grid gap-px sm:grid-cols-3"
-                style={{ backgroundColor: 'var(--border-tertiary)' }}
-              >
-                {statusCards.map((card, i) => {
-                  const tone = toneStyles(card.tone);
-                  return (
-                    <div
-                      key={card.title}
-                      className="flex flex-col gap-3 p-5 lg:p-6"
-                      style={{ backgroundColor: 'var(--bg-primary)', animation: `fade-up 0.5s ease ${0.65 + i * 0.1}s both` }}
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.22em]" style={tone.eyebrow}>
-                          {card.eyebrow}
-                        </p>
-                        <span
-                          className="shrink-0 rounded-[4px] border px-2 py-0.5 text-[11px] font-semibold"
-                          style={{ ...tone.shell, ...tone.value }}
-                        >
-                          {card.value}
-                        </span>
-                      </div>
-                      <p className="text-sm font-medium leading-5" style={{ color: 'var(--text-primary)' }}>
-                        {card.title}
-                      </p>
-                      <p className="text-xs leading-5" style={{ color: 'var(--text-secondary)' }}>
-                        {card.detail}
-                      </p>
-                    </div>
-                  );
-                })}
+              <div className="hero-float-card hero-float-card-left">
+                <Radar className="h-4 w-4 text-[var(--amber-text)]" />
+                <span><strong>Readiness gap</strong><small>3 roles affected</small></span>
+              </div>
+              <div className="hero-float-card hero-float-card-right">
+                <CircleCheck className="h-4 w-4 text-[var(--green-text)]" />
+                <span><strong>Evidence found</strong><small>Manager review ready</small></span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            STATS BAND — full-bleed bg break, gradient numbers
-        ═══════════════════════════════════════════════════════════ */}
-        <div style={{ backgroundColor: 'var(--bg-secondary)' }}>
-          <div className={`${inner} py-16 lg:py-20`}>
+        <section className="border-y border-[var(--border-tertiary)] bg-[var(--bg-tertiary)]" aria-label="Current integrations">
+          <div className={`${inner} flex flex-col items-center justify-between gap-5 py-6 md:flex-row`}>
+            <p className="text-sm text-[var(--text-secondary)]">Built around the tools your team already uses.</p>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 md:justify-end">
+              {integrations.map((integration) => (
+                <IntegrationPill key={integration.provider} provider={integration.provider} name={integration.name} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell" id="how-it-works">
+          <div className={inner}>
             <AnimateIn>
-              <p className="type-kicker text-center mb-10">The cost of being unready</p>
+              <SectionHeading
+                eyebrow="One operating loop"
+                title="From scattered context to verified action."
+                body="Canon closes the gap between what your company knows and what your customer-facing team does next."
+                align="center"
+              />
             </AnimateIn>
-            <div
-              className="grid grid-cols-1 gap-px sm:grid-cols-3"
-              style={{ backgroundColor: 'var(--border-tertiary)' }}
-            >
-              {statsData.map((item, i) => (
-                <AnimateIn key={item.label} delay={i * 80}>
-                  <div
-                    className="flex flex-col gap-4 px-8 py-10"
-                    style={{ backgroundColor: 'var(--bg-secondary)' }}
-                  >
-                    <div
-                      className={`accent-bar h-[3px] w-8 rounded-full`}
-                      style={{ backgroundColor: item.accent, animationDelay: `${i * 80}ms` }}
-                    />
-                    <p className={`type-landing-metric ${item.gradient}`}>{item.stat}</p>
-                    <div>
-                      <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{item.label}</p>
-                      <p className="mt-2 text-sm leading-6" style={{ color: 'var(--text-secondary)' }}>{item.body}</p>
-                      {item.source && (
-                        <p className="mt-3 text-[11px] leading-4" style={{ color: 'var(--text-tertiary)' }}>
-                          Source:{' '}
-                          {item.sourceUrl ? (
-                            <a
-                              href={item.sourceUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline underline-offset-2 transition-colors hover:text-[var(--text-secondary)]"
-                            >
-                              {item.source}
-                            </a>
-                          ) : item.source}
-                        </p>
-                      )}
+
+            <div className="operating-loop mt-12">
+              {operatingLoop.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <AnimateIn key={step.number} delay={index * 70} className="h-full">
+                    <article className="loop-card h-full">
+                      <div className="flex items-center justify-between">
+                        <span className="loop-number">{step.number}</span>
+                        <span className="loop-icon"><Icon className="h-4 w-4" /></span>
+                      </div>
+                      <h3 className="mt-8 text-base font-medium">{step.title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{step.body}</p>
+                    </article>
+                  </AnimateIn>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell border-y border-[var(--border-tertiary)] bg-[var(--bg-secondary)]" id="product-tour">
+          <div className={inner}>
+            <AnimateIn>
+              <SectionHeading
+                eyebrow="Inside Canon"
+                title="One system for the full readiness lifecycle."
+                body="Start with the ramp. Stay for every change, meeting, milestone, and proof point after it."
+              />
+            </AnimateIn>
+
+            <div className="mt-14 space-y-8 lg:space-y-12">
+              {productStories.map((story, index) => (
+                <AnimateIn key={story.eyebrow} delay={80}>
+                  <article className={`product-story product-story-${story.accent} ${index % 2 === 1 ? 'product-story-reverse' : ''}`}>
+                    <div className="product-story-copy">
+                      <p className="section-eyebrow">{story.eyebrow}</p>
+                      <h3 className="mt-4 text-2xl font-medium leading-tight tracking-[-0.02em] sm:text-3xl">{story.title}</h3>
+                      <p className="mt-4 max-w-lg text-sm leading-7 text-[var(--text-secondary)]">{story.body}</p>
+                      <ul className="mt-7 space-y-3">
+                        {story.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                            <span className="product-check"><Check className="h-3 w-3" /></span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
+                    <div className="product-visual">
+                      <div className="product-visual-bar">
+                        <div className="flex gap-1.5"><span /><span /><span /></div>
+                        <span>Canon / {story.eyebrow}</span>
+                      </div>
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image src={story.image} alt={story.alt} width={1920} height={1440} className="h-full w-full object-cover" />
+                      </div>
+                    </div>
+                  </article>
                 </AnimateIn>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            PRODUCT TOUR — real app screenshots from public assets
-        ═══════════════════════════════════════════════════════════ */}
-        <section id="product-tour" className={`${inner} py-20 lg:py-28 scroll-mt-[88px]`}>
+        <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8" aria-label="Request access">
           <AnimateIn>
-            <ProductTour
-              eyebrow="Product sneak peek"
-              title="A first look at the Canon readiness system."
-              description="Canon turns scattered company knowledge into a focused operating surface for new hire readiness, field updates, milestone tracking, and customer-facing confidence."
-              layers={productTourLayers}
-            />
+            <div className="final-cta mx-auto max-w-[88rem]">
+              <div className="final-cta-grid pointer-events-none absolute inset-0" />
+              <div className="relative flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl">
+                  <p className="section-eyebrow text-[var(--canon-purple-bright)]">Ready when your team is</p>
+                  <h2 className="mt-4 text-2xl font-medium tracking-[-0.02em] sm:text-3xl">Give your next customer moment a clearer path.</h2>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">See how Canon turns the context your team already creates into practical readiness work.</p>
+                </div>
+                <Button size="lg" className="btn-primary-shimmer shrink-0 self-start md:self-center" asChild>
+                  <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
+                    Get access
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           </AnimateIn>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            HOW IT WORKS — connected steps, purple rail
-        ═══════════════════════════════════════════════════════════ */}
-        <section id="how-it-works" className={`${inner} py-20 lg:py-28 scroll-mt-[88px]`}>
-          <AnimateIn className="mb-12 max-w-xl">
-            <span className="badge-hero mb-5 inline-flex">The readiness loop</span>
-            <h2 className="mt-5 type-landing-h2" style={{ color: 'var(--text-primary)' }}>
-              Set up once. Runs continuously.
-            </h2>
-            <p className="mt-4 type-landing-body" style={{ color: 'var(--text-secondary)' }}>
-              Canon connects your knowledge, gets new hires ready faster, and monitors
-              for changes that affect the field, in a single loop that keeps the whole team
-              customer-ready.
-            </p>
-          </AnimateIn>
-
-          {/* Steps with connecting rail */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {rampLoop.map((item, i) => (
-              <AnimateIn key={item.step} delay={i * 90}>
-                <div className="relative flex flex-col gap-4">
-                  {i < rampLoop.length - 1 && (
-                    <div
-                      className="pointer-events-none absolute top-[1.125rem] left-12 right-[-2rem] hidden h-px lg:block"
-                      style={{
-                        background:
-                          'linear-gradient(90deg, var(--canon-purple-border), var(--canon-purple-border))',
-                        opacity: 0.45,
-                      }}
-                    />
-                  )}
-
-                  <span
-                    className="step-number relative z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border text-xs font-semibold"
-                    style={{
-                      borderColor: 'var(--canon-purple-border)',
-                      backgroundColor: 'var(--bg-page)',
-                      color: 'var(--canon-purple)',
-                      boxShadow: '0 0 0 10px var(--bg-page)',
-                    }}
-                  >
-                    {item.step}
-                  </span>
-
-                  <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                    {item.title}
-                  </p>
-
-                  <p className="text-sm leading-6" style={{ color: 'var(--text-secondary)' }}>
-                    {item.body}
-                  </p>
-                </div>
-              </AnimateIn>
-            ))}
-          </div>
-
-          {/* Mid-page CTA checkpoint */}
-          <AnimateIn className="mt-12">
-            <div
-              className="card-hover flex flex-col items-start gap-4 rounded-[10px] border p-6 sm:flex-row sm:items-center sm:justify-between"
-              style={{ borderColor: 'var(--border-secondary)', backgroundColor: 'var(--bg-secondary)' }}
-            >
+        <section className="section-shell" aria-labelledby="proof-title">
+          <div className={`${inner} grid items-center gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20`}>
+            <AnimateIn>
               <div>
-                <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                  Ready to keep your field team customer-ready?
+                <p className="section-eyebrow">Proof, not progress bars</p>
+                <h2 id="proof-title" className="type-landing-h2 mt-4">Readiness should show up in the work.</h2>
+                <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
+                  Canon Checks looks for evidence across connected activity, flags uncertain proof, and keeps the manager in control of the final call.
                 </p>
-                <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Start with new hire readiness, then keep the broader team current as things change.
-                </p>
-              </div>
-              <Button asChild className="btn-primary-shimmer shrink-0">
-                <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
-                  Get Access <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </AnimateIn>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════
-            FEATURES BAND — bg break, cards with hover glow
-        ═══════════════════════════════════════════════════════════ */}
-        <div style={{ backgroundColor: 'var(--bg-secondary)' }}>
-          <div className={`${inner} py-20 lg:py-28`}>
-            <AnimateIn className="mb-12">
-              <span className="badge-hero mb-5 inline-flex">What you get</span>
-              <h2 className="mt-5 type-landing-h2" style={{ color: 'var(--text-primary)' }}>
-                Built for every stage of Technical GTM readiness.
-              </h2>
-            </AnimateIn>
-
-            <div className="grid gap-5 lg:grid-cols-3">
-              {features.map((card, i) => (
-                <AnimateIn key={card.kicker} delay={i * 80}>
-                  <div
-                    className="card-hover flex h-full flex-col gap-5 rounded-[12px] border p-7"
-                    style={{ borderColor: 'var(--border-tertiary)', backgroundColor: 'var(--bg-tertiary)' }}
-                  >
-                    <div
-                      className={`accent-bar h-[3px] w-8 rounded-full`}
-                      style={{ backgroundColor: card.accent, animationDelay: `${i * 80}ms` }}
-                    />
-                    <div>
-                      <p className="type-kicker mb-2">{card.kicker}</p>
-                      <h3 className="type-landing-h3" style={{ color: 'var(--text-primary)' }}>{card.title}</h3>
-                      <p className="mt-3 text-sm leading-7" style={{ color: 'var(--text-secondary)' }}>{card.body}</p>
-                    </div>
-                  </div>
-                </AnimateIn>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ═══════════════════════════════════════════════════════════
-            INTEGRATIONS — back to bg-page
-        ═══════════════════════════════════════════════════════════ */}
-        <section id="integrations" className={`${inner} py-20 lg:py-28 scroll-mt-[88px]`}>
-          <div className="grid gap-12 lg:grid-cols-[0.45fr_0.55fr] lg:items-start">
-            <AnimateIn>
-              <span className="badge-hero mb-5 inline-flex">Integrations</span>
-              <h2 className="mt-5 type-landing-h2" style={{ color: 'var(--text-primary)' }}>
-                Connected to where readiness gaps begin.
-              </h2>
-              <p className="mt-4 type-landing-body" style={{ color: 'var(--text-secondary)' }}>
-                Canon pulls context from the tools your team uses every day so new hire paths,
-                field updates, and readiness alerts always reflect what is true now.
-              </p>
-            </AnimateIn>
-
-            <div className="grid grid-cols-2 gap-4">
-              {integrations.map((item, i) => (
-                <AnimateIn key={item.name} delay={i * 70}>
-                  <div
-                    className="card-hover rounded-[10px] border p-5"
-                    style={{ borderColor: 'var(--border-tertiary)', backgroundColor: 'var(--bg-primary)' }}
-                  >
-                    <div
-                      className="mb-4 flex h-10 w-10 items-center justify-center rounded-[8px] border"
-                      style={{ borderColor: 'var(--border-secondary)', backgroundColor: 'var(--bg-secondary)' }}
-                    >
-                      {item.icon}
-                    </div>
-                    <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{item.name}</p>
-                    <p className="mt-2 text-xs leading-5" style={{ color: 'var(--text-secondary)' }}>{item.body}</p>
-                  </div>
-                </AnimateIn>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════
-            SECURITY BAND — third bg break
-        ═══════════════════════════════════════════════════════════ */}
-        <div id="security" style={{ backgroundColor: 'var(--bg-secondary)' }} className="scroll-mt-[88px]">
-          <div className={`${inner} py-20 lg:py-28`}>
-            <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-              <AnimateIn>
-                <span className="badge-hero mb-5 inline-flex">Security</span>
-                <h2 className="mt-5 type-landing-h2" style={{ color: 'var(--text-primary)' }}>
-                  Security is part of the model, not an afterthought.
-                </h2>
-                <ul className="mt-8 space-y-5">
-                  {[
-                    'OAuth sign-ins include tamper checks to prevent replayed authentication flows.',
-                    'Tokens are encrypted at rest before storage.',
-                    'Connected-data access requires a valid authenticated session.',
-                    'Canon only reads explicitly connected sources and never writes to your tools.',
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-6" style={{ color: 'var(--text-secondary)' }}>
-                      <span
-                        className="mt-[0.35em] h-1.5 w-1.5 shrink-0 rounded-full"
-                        style={{ backgroundColor: 'var(--canon-purple)' }}
-                        aria-hidden
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </AnimateIn>
-
-              <AnimateIn delay={80}>
-                <p className="type-kicker mb-4">Data flow</p>
-                <div className="space-y-3">
-                  {[
-                    { step: '01', title: 'Connect', body: 'OAuth access to knowledge sources and communication systems.' },
-                    { step: '02', title: 'Synthesize', body: 'Canon indexes content, generates briefs, and monitors for meaningful changes.' },
-                    { step: '03', title: 'Route', body: 'Updates and alerts go to the channels where your team already operates.' },
-                  ].map((item, i) => (
-                    <div
-                      key={item.step}
-                      className="card-hover flex gap-4 rounded-[8px] border p-4"
-                      style={{ borderColor: 'var(--border-tertiary)', backgroundColor: 'var(--bg-tertiary)', transitionDelay: `${i * 60}ms` }}
-                    >
-                      <span className="mt-px shrink-0 text-xs font-semibold tabular-nums" style={{ color: 'var(--canon-purple)' }}>
-                        {item.step}
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{item.title}</p>
-                        <p className="mt-1 text-sm leading-5" style={{ color: 'var(--text-secondary)' }}>{item.body}</p>
-                      </div>
-                    </div>
-                  ))}
+                <div className="mt-8 grid grid-cols-2 gap-3">
+                  <div className="mini-proof-card"><strong>Automatic</strong><span>Evidence scan</span></div>
+                  <div className="mini-proof-card"><strong>Human</strong><span>Review when needed</span></div>
                 </div>
-              </AnimateIn>
-            </div>
-          </div>
-        </div>
-
-        {/* ═══════════════════════════════════════════════════════════
-            FAQ — back to bg-page
-        ═══════════════════════════════════════════════════════════ */}
-        <section className={`${inner} py-20 lg:py-28`}>
-          <div className="grid gap-12 lg:grid-cols-[0.45fr_0.55fr] lg:items-start">
-            <AnimateIn>
-              <span className="badge-hero mb-5 inline-flex">FAQ</span>
-              <h2 className="mt-5 type-landing-h2" style={{ color: 'var(--text-primary)' }}>
-                Common questions
-              </h2>
-              <p className="mt-4 type-landing-body" style={{ color: 'var(--text-secondary)' }}>
-                Anything not covered?{' '}
-                <a
-                  href="mailto:john@usecanon.com"
-                  className="underline underline-offset-2 transition-colors hover:text-[var(--text-primary)]"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Email us.
-                </a>
-              </p>
+              </div>
             </AnimateIn>
-            <AnimateIn delay={60}>
-              <FaqAccordion items={faqItems} />
+
+            <AnimateIn delay={100}>
+              <div className="proof-panel">
+                <div className="proof-panel-head">
+                  <div>
+                    <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Canon Check</p>
+                    <h3 className="mt-2 text-base font-medium">Run a customer discovery call</h3>
+                  </div>
+                  <span className="proof-status"><Clock3 className="h-3.5 w-3.5" />Reviewing</span>
+                </div>
+                <div className="proof-steps">
+                  <div className="proof-step is-complete">
+                    <span className="proof-step-icon"><MessageSquare className="h-4 w-4" /></span>
+                    <div><strong>Communication activity</strong><small>Team thread matched the milestone trigger</small></div>
+                    <CircleCheck className="ml-auto h-4 w-4 text-[var(--green-text)]" />
+                  </div>
+                  <div className="proof-step is-complete">
+                    <span className="proof-step-icon"><ShieldCheck className="h-4 w-4" /></span>
+                    <div><strong>Tool access confirmed</strong><small>Required customer tools are ready</small></div>
+                    <CircleCheck className="ml-auto h-4 w-4 text-[var(--green-text)]" />
+                  </div>
+                  <div className="proof-step is-review">
+                    <span className="proof-step-icon"><UserRoundCheck className="h-4 w-4" /></span>
+                    <div><strong>Manager verification</strong><small>One evidence item is ready for review</small></div>
+                    <span className="text-xs font-medium text-[var(--amber-text)]">Review</span>
+                  </div>
+                </div>
+                <div className="proof-panel-foot">
+                  <div><span>2</span><small>signals verified</small></div>
+                  <div><span>1</span><small>manager review</small></div>
+                  <div><span>3</span><small>sources checked</small></div>
+                </div>
+              </div>
             </AnimateIn>
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            FINAL CTA — animated gradient border, centered
-        ═══════════════════════════════════════════════════════════ */}
-        <section className={`${inner} pb-28`}>
+        <section className="section-shell border-y border-[var(--border-tertiary)] bg-[var(--bg-tertiary)]" id="integrations">
+          <div className={inner}>
+            <AnimateIn>
+              <SectionHeading
+                eyebrow="Connected context"
+                title="Your tools already know what changed. Canon turns it into action."
+                body="Each connection has a clear job in the readiness loop: context in, the right next step out."
+              />
+            </AnimateIn>
+
+            <div className="integration-grid mt-12">
+              {integrations.map((integration, index) => (
+                <AnimateIn key={integration.provider} delay={index * 60} className="h-full">
+                  <article className={`integration-card ${integration.tone}`}>
+                    <div className="integration-logo-shell"><IntegrationLogos provider={integration.provider} size={25} /></div>
+                    <div className="mt-6 flex items-center justify-between gap-3">
+                      <h3 className="text-base font-medium">{integration.name}</h3>
+                      <span className="integration-role">{integration.role}</span>
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{integration.description}</p>
+                  </article>
+                </AnimateIn>
+              ))}
+            </div>
+
+            <AnimateIn delay={120}>
+              <div className="context-flow mt-7">
+                <div className="context-flow-item"><BrainCircuit className="h-4 w-4" /><span><strong>Context in</strong><small>Selected workspace sources</small></span></div>
+                <ArrowRight className="context-flow-arrow" />
+                <div className="context-flow-canon"><Sparkles className="h-4 w-4" /><span>Canon</span></div>
+                <ArrowRight className="context-flow-arrow" />
+                <div className="context-flow-item"><Zap className="h-4 w-4" /><span><strong>Action out</strong><small>Right person, right moment</small></span></div>
+              </div>
+            </AnimateIn>
+          </div>
+        </section>
+
+        <section className="py-16 sm:py-20" id="security">
+          <div className={inner}>
+            <AnimateIn>
+              <div className="trust-strip">
+                <div className="trust-intro">
+                  <LockKeyhole className="h-5 w-5 text-[var(--canon-purple-bright)]" />
+                  <div><strong>Built for controlled context.</strong><span>Connect what matters. Keep people in the loop.</span></div>
+                </div>
+                <div className="trust-item"><Check className="h-3.5 w-3.5" />OAuth-connected apps</div>
+                <div className="trust-item"><Check className="h-3.5 w-3.5" />Explicit source selection</div>
+                <div className="trust-item"><Check className="h-3.5 w-3.5" />Human approval paths</div>
+              </div>
+            </AnimateIn>
+          </div>
+        </section>
+
+        <section className="section-shell border-t border-[var(--border-tertiary)] bg-[var(--bg-secondary)]" id="faq">
+          <div className={`${inner} grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20`}>
+            <AnimateIn>
+              <div>
+                <p className="section-eyebrow">Questions</p>
+                <h2 className="type-landing-h2 mt-4">The short version.</h2>
+                <p className="mt-5 text-sm leading-7 text-[var(--text-secondary)]">Canon is focused on a simple outcome: make the next customer-facing action the right one.</p>
+              </div>
+            </AnimateIn>
+            <AnimateIn delay={80}><FaqAccordion items={faqItems} /></AnimateIn>
+          </div>
+        </section>
+
+        <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <AnimateIn>
-            {/* gradient-border-wrap provides the animated gradient border */}
-            <div className="gradient-border-wrap">
-              <div
-                className="rounded-[13px] px-8 py-16 text-center sm:px-16"
-                style={{ backgroundColor: 'var(--bg-primary)' }}
-              >
-                <p className="type-kicker mb-6">Get started today</p>
-                <h2
-                  className="mx-auto max-w-2xl type-landing-h2"
-                  style={{ color: 'var(--text-primary)' }}
-                >
-                  Keep every Technical GTM hire and field teammate customer-ready.
-                </h2>
-                <p
-                  className="mx-auto mt-4 max-w-xl type-landing-body"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Canon replaces scattered onboarding docs and reactive enablement with a
-                  continuous readiness loop for new hires, current teams, and every product
-                  change that matters.
-                </p>
-                <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <div className="final-cta mx-auto max-w-[88rem]">
+              <div className="final-cta-grid pointer-events-none absolute inset-0" />
+              <div className="relative max-w-3xl">
+                <p className="section-eyebrow text-[var(--canon-purple-bright)]">Keep the field current</p>
+                <h2 className="type-landing-h2 mt-4">Your product will keep changing. Your team can keep up.</h2>
+                <p className="mt-5 max-w-xl text-base leading-7 text-[var(--text-secondary)]">Build the readiness loop once. Let Canon keep it moving.</p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button size="lg" className="btn-primary-shimmer" asChild>
-                    <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
-                      Get Access
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
+                    <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">Get access <ArrowRight className="h-4 w-4" /></a>
                   </Button>
-                  <Button size="lg" variant="secondary" asChild>
-                    <a href="mailto:john@usecanon.com">Ask a question</a>
-                  </Button>
+                  <Button size="lg" variant="secondary" asChild><a href="#product-tour">See how it works</a></Button>
                 </div>
+              </div>
+              <div className="final-cta-orbit" aria-hidden="true">
+                <span className="orbit-core"><Sparkles className="h-6 w-6" /></span>
+                <span className="orbit-node orbit-node-one"><MessageSquare className="h-4 w-4" /></span>
+                <span className="orbit-node orbit-node-two"><Flag className="h-4 w-4" /></span>
+                <span className="orbit-node orbit-node-three"><CircleCheck className="h-4 w-4" /></span>
               </div>
             </div>
           </AnimateIn>
         </section>
-
       </main>
 
-      <footer className="border-t" style={{ borderColor: 'var(--border-tertiary)' }}>
-        <div
-          className={`${inner} flex flex-col gap-4 py-10 sm:flex-row sm:items-center sm:justify-between`}
-          style={{ color: 'var(--text-tertiary)' }}
-        >
-          <p>© 2026 Canon</p>
-          <a
-            href="mailto:john@usecanon.com"
-            className="transition-colors duration-[120ms] hover:text-[var(--text-primary)]"
-          >
-            Contact
-          </a>
+      <footer className="border-t border-[var(--border-tertiary)] bg-[var(--bg-tertiary)]">
+        <div className={`${inner} flex flex-col items-start justify-between gap-5 py-7 sm:flex-row sm:items-center`}>
+          <div className="flex items-center gap-2.5">
+            <Image src="/web-app-manifest-512x512.png" alt="Canon" width={25} height={25} className="rounded-[7px]" />
+            <span className="text-sm font-medium">Canon</span>
+            <span className="hidden text-xs text-[var(--text-tertiary)] sm:inline">Readiness for Technical GTM</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--text-tertiary)]">
+            <a className="transition-colors hover:text-[var(--text-primary)]" href="mailto:john@usecanon.com">Contact</a>
+            <a className="transition-colors hover:text-[var(--text-primary)]" href={requestAccessHref} target="_blank" rel="noopener noreferrer">Sign in</a>
+            <span>© 2026 Canon</span>
+          </div>
         </div>
       </footer>
     </div>
