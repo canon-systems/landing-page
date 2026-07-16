@@ -1,12 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const appHref = 'https://app.usecanon.com';
+const topVisibilityThreshold = 64;
+const hideAfterScrollPosition = 160;
+const hideAfterDownwardDistance = 24;
+const showAfterUpwardDistance = 8;
 
 const navLinks = [
   { title: 'Product', href: '#product-tour' },
@@ -17,26 +21,80 @@ const navLinks = [
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
 
-  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const headerHeight = 66;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        setMobileOpen(false);
+  useEffect(() => {
+    let previousScrollY = Math.max(window.scrollY, 0);
+    let scrollDirection: 'up' | 'down' | null = null;
+    let directionDistance = 0;
+    let animationFrameId: number | null = null;
+
+    const updateNavVisibility = () => {
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const scrollDelta = currentScrollY - previousScrollY;
+
+      if (scrollDelta === 0) {
+        animationFrameId = null;
+        return;
       }
-    }
+
+      const nextDirection = scrollDelta > 0 ? 'down' : 'up';
+
+      if (nextDirection !== scrollDirection) {
+        scrollDirection = nextDirection;
+        directionDistance = 0;
+      }
+
+      directionDistance += Math.abs(scrollDelta);
+
+      if (mobileOpen || currentScrollY <= topVisibilityThreshold) {
+        setIsNavVisible(true);
+      } else if (nextDirection === 'up' && directionDistance >= showAfterUpwardDistance) {
+        setIsNavVisible(true);
+      } else if (
+        nextDirection === 'down'
+        && currentScrollY >= hideAfterScrollPosition
+        && directionDistance >= hideAfterDownwardDistance
+      ) {
+        setIsNavVisible(false);
+      }
+
+      previousScrollY = currentScrollY;
+      animationFrameId = null;
+    };
+
+    const handleScroll = () => {
+      if (animationFrameId === null) {
+        animationFrameId = window.requestAnimationFrame(updateNavVisibility);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [mobileOpen]);
+
+  const handleMobileToggle = () => {
+    setIsNavVisible(true);
+    setMobileOpen((isOpen) => !isOpen);
   };
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-[var(--border-tertiary)] bg-[rgba(251,250,255,0.86)] backdrop-blur-xl"
+      className={`sticky top-0 z-50 w-full border-b border-[var(--border-tertiary)] bg-[rgba(251,250,255,0.86)] backdrop-blur-xl transition-transform duration-200 ease-out ${
+        isNavVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+      onFocus={() => setIsNavVisible(true)}
     >
-      <nav className="relative mx-auto flex h-16 max-w-[88rem] items-center justify-between px-4 md:px-6 lg:px-8">
+      <nav
+        aria-label="Primary navigation"
+        className="relative mx-auto flex h-16 max-w-[88rem] items-center justify-between px-4 md:px-6 lg:px-8"
+      >
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
           <Image
@@ -62,7 +120,6 @@ export function Navigation() {
               style={{ color: 'var(--text-secondary)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-              onClick={(e) => handleNavLinkClick(e, link.href)}
             >
               {link.title}
             </a>
@@ -87,8 +144,10 @@ export function Navigation() {
           <Button
             variant="secondary"
             size="icon"
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={handleMobileToggle}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
@@ -97,16 +156,17 @@ export function Navigation() {
 
       {mobileOpen && (
         <div
+          id="mobile-navigation"
           className="border-t border-[var(--border-tertiary)] bg-[var(--bg-tertiary)] px-4 py-3 lg:hidden"
         >
-          <nav className="flex flex-col gap-1">
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.title}
                 href={link.href}
                 className="rounded-[8px] px-3 py-2 text-sm transition-colors duration-[120ms] hover:bg-[var(--bg-secondary)]"
                 style={{ color: 'var(--text-secondary)' }}
-                onClick={(e) => handleNavLinkClick(e, link.href)}
+                onClick={() => setMobileOpen(false)}
               >
                 {link.title}
               </a>

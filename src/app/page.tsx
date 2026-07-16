@@ -248,7 +248,7 @@ function SectionHeading({
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen overflow-hidden bg-[var(--bg-page)] text-[var(--text-primary)]">
+    <div className="min-h-screen overflow-x-clip bg-[var(--bg-page)] text-[var(--text-primary)]">
       <Navigation />
 
       <main>
@@ -385,7 +385,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="section-shell scroll-mt-[88px] border-y border-[var(--border-tertiary)] bg-[var(--bg-secondary)]" id="product-tour">
+        <section className="section-shell border-y border-[var(--border-tertiary)] bg-[var(--bg-secondary)]" id="product-tour">
           <div className={inner}>
             <AnimateIn>
               <SectionHeading
