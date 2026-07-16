@@ -1,17 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: 'Canon — Engineering Signals for Leaders',
-  description: 'Turn GitHub and Jira activity into clear daily and weekly leadership signals.',
+  metadataBase: new URL('https://usecanon.com'),
+  title: {
+    default: 'Canon | Technical GTM Readiness',
+    template: '%s | Canon',
+  },
+  description:
+    'Turn changing company context into role-specific ramp plans, meeting briefings, readiness actions, and verified progress.',
 };
 
 export default function RootLayout({
@@ -20,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
