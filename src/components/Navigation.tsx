@@ -7,6 +7,7 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const appHref = 'https://app.usecanon.com';
+const demoHref = 'https://calendar.app.google/fjxUSvLSQrHvkMKA8';
 const topVisibilityThreshold = 64;
 const hideAfterScrollPosition = 160;
 const hideAfterDownwardDistance = 24;
@@ -132,8 +133,8 @@ export function Navigation() {
             <a href={appHref} target="_blank" rel="noopener noreferrer">Sign In</a>
           </Button>
           <Button size="sm" asChild>
-            <a href={appHref} target="_blank" rel="noopener noreferrer">
-              Get Access
+            <a href={demoHref} target="_blank" rel="noopener noreferrer">
+              Book a Demo
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </Button>
@@ -179,8 +180,8 @@ export function Navigation() {
               </a>
             </Button>
             <Button className="w-full" asChild>
-              <a href={appHref} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
-                Get Access
+              <a href={demoHref} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
+                Book a Demo
                 <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </Button>
