@@ -334,7 +334,7 @@ export default function LandingPage() {
                     className="h-full w-full object-contain bg-[#0c091b]"
                     aria-label="Canon product demo showing change detection, impact mapping, and readiness actions."
                   >
-                    <source src="/Canon%20Demo%20v1.mp4" type="video/mp4" />
+                    <source src="/videos/canon-demo.mp4" type="video/mp4" />
                     Your browser does not support embedded video.
                   </video>
                 </div>
