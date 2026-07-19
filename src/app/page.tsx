@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 
 import { AnimateIn } from '@/components/AnimateIn';
+import { BrandMark } from '@/components/BrandMark';
 import { FaqAccordion } from '@/components/landing-page/FaqAccordion';
 import { IntegrationLogos, type IntegrationProvider } from '@/components/IntegrationLogos';
 import { Navigation } from '@/components/Navigation';
@@ -128,7 +129,7 @@ const productStories = [
     title: 'Get new hires productive faster.',
     body:
       'Canon gives each hire a role-specific path with timed learning steps, tool access, evidence checks, and manager review.',
-    image: '/new_hire.png',
+    image: '/pictures/new_hire.png',
     alt: 'Canon Hire Paths showing Maya Chen’s AI Solutions Architect ramp, milestone progress, Canon Checks, and proof of progress.',
     bullets: ['Role-specific paths and ramp timing', 'Live Canon Checks and evidence status', 'Tool access and manager review'],
     accent: 'purple',
@@ -138,7 +139,7 @@ const productStories = [
     title: 'Turn role expectations into an approved readiness plan.',
     body:
       'Define the trigger, proof, timing, and dependency behind each learning step so managers can see what real progress should look like.',
-    image: '/milestones.png',
+    image: '/pictures/milestones.png',
     alt: 'Canon Milestones showing the AI Solutions Architect approved plan with timed learning steps, triggers, proof requirements, and dependencies.',
     bullets: ['Generated role plans with human approval', 'Real-work triggers and dependencies', 'Clear proof requirements'],
     accent: 'green',
@@ -148,7 +149,7 @@ const productStories = [
     title: 'Turn a detected change into an updated resource.',
     body:
       'Canon explains what changed in your product, pricing, messaging, or process, maps the roles and resources it affects, and helps prepare the right update for review.',
-    image: '/readiness.png',
+    image: '/pictures/readiness.png',
     alt: 'Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action.',
     bullets: ['Change and impact detection', 'Affected roles and resources', 'Update preparation and review'],
     accent: 'amber',
@@ -158,7 +159,7 @@ const productStories = [
     title: 'Prepare the team before the next customer meeting.',
     body:
       'The Briefings pane watches the connected calendar, surfaces upcoming meetings, and tracks whether each briefing is waiting, delivered, or needs attention.',
-    image: '/briefing.png',
+    image: '/pictures/briefing.png',
     alt: 'Canon Meeting Briefings showing an Outlook Calendar connection, an upcoming customer meeting, delivered briefings, and one item needing attention.',
     bullets: ['Connected calendar awareness', 'Upcoming meeting preparation', 'Waiting, delivered, and attention states'],
     accent: 'purple',
@@ -168,7 +169,7 @@ const productStories = [
     title: 'Keep the source material behind every recommendation visible.',
     body:
       'Canon shows the meeting libraries and team context it can use, how much knowledge is ready, and when each source was last updated.',
-    image: '/knowledge.png',
+    image: '/pictures/knowledge.png',
     alt: 'Canon Knowledge showing three active Granola sources and 141 items ready for Canon to use.',
     bullets: ['Source health and update history', 'Customer and product context in one place', 'Clear visibility into what Canon can use'],
     accent: 'green',
@@ -178,7 +179,7 @@ const productStories = [
     title: 'Give every role the tools and context it needs to operate.',
     body:
       'Canon keeps role expectations and the systems behind them together, so every hire starts with the right access path and a clear owner.',
-    image: '/roles.png',
+    image: '/pictures/roles.png',
     alt: 'Canon Settings showing the Roles & Tools catalog with three Technical GTM roles and their configured tools.',
     bullets: ['Role-specific tool mapping', 'Clear owners for every request', 'One readiness foundation'],
     accent: 'amber',
@@ -188,7 +189,7 @@ const productStories = [
     title: 'Put the next readiness action where the team already works.',
     body:
       'Canon routes access requests and follow-up actions into connected communication tools with the right context and a manager-controlled approval path. The current visual shows one example of that flow in Slack.',
-    image: '/slack_delivery.png',
+    image: '/pictures/slack_delivery.png',
     alt: 'Canon’s Slack delivery surface showing access requests with links to Zoom, Gong, and GitHub and manager approval actions.',
     bullets: ['Context-rich access requests', 'Deep links to the work', 'Manager-controlled approvals'],
     accent: 'purple',
@@ -328,7 +329,6 @@ export default function LandingPage() {
                     loop
                     playsInline
                     preload="metadata"
-                    poster="/readiness.png"
                     className="h-full w-full object-contain bg-[#0c091b]"
                     aria-label="Canon product demo showing change detection, impact mapping, and readiness actions."
                   >
@@ -602,11 +602,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-[var(--border-tertiary)] bg-[var(--bg-tertiary)]">
         <div className={`${inner} flex flex-col items-start justify-between gap-5 py-7 sm:flex-row sm:items-center`}>
-          <div className="flex items-center gap-2.5">
-            <Image src="/web-app-manifest-512x512.png" alt="Canon" width={25} height={25} className="rounded-[7px]" />
-            <span className="text-sm font-medium">Canon</span>
-            <span className="hidden text-xs text-[var(--text-tertiary)] sm:inline">Readiness for Technical GTM</span>
-          </div>
+          <BrandMark />
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--text-tertiary)]">
             <a className="transition-colors hover:text-[var(--text-primary)]" href="mailto:john@usecanon.com">Contact</a>
             <a className="transition-colors hover:text-[var(--text-primary)]" href={appHref} target="_blank" rel="noopener noreferrer">Sign in</a>
