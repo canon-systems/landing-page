@@ -324,10 +324,8 @@ export default function LandingPage() {
 
                 <div className="hero-media-stage">
                   <video
-                    autoPlay
                     controls
                     loop
-                    muted
                     playsInline
                     preload="metadata"
                     poster="/readiness.png"
