@@ -24,23 +24,24 @@ import { IntegrationLogos, type IntegrationProvider } from '@/components/Integra
 import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 
-const requestAccessHref = 'https://app.usecanon.com';
+const appHref = 'https://app.usecanon.com';
+const demoHref = 'https://calendar.app.google/fjxUSvLSQrHvkMKA8';
 const inner = 'mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8';
 
 export const metadata: Metadata = {
   title: 'Readiness That Keeps Up With Your Product',
   description:
-    'Canon turns live team context into role-specific ramp plans, meeting briefings, readiness actions, and verified progress for Technical GTM teams.',
+    'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
   openGraph: {
     title: 'Canon | Readiness that keeps up with your product',
     description:
-      'Connect the context your team already creates. Canon prepares the next customer moment and proves who is ready for it.',
+      'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Canon | Readiness that keeps up with your product',
     description:
-      'Connect the context your team already creates. Canon prepares the next customer moment and proves who is ready for it.',
+      'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
   },
 };
 
@@ -124,9 +125,9 @@ const operatingLoop = [
 const productStories = [
   {
     eyebrow: 'Hire paths',
-    title: 'Guide every hire through the work that proves readiness.',
+    title: 'Get new hires productive faster.',
     body:
-      'Launch a role-specific path with timed learning steps, tool access, live Canon Checks, and manager review in one operating view.',
+      'Canon gives each hire a role-specific path with timed learning steps, tool access, evidence checks, and manager review.',
     image: '/new_hire.png',
     alt: 'Canon Hire Paths showing Maya Chen’s AI Solutions Architect ramp, milestone progress, Canon Checks, and proof of progress.',
     bullets: ['Role-specific paths and ramp timing', 'Live Canon Checks and evidence status', 'Tool access and manager review'],
@@ -144,12 +145,12 @@ const productStories = [
   },
   {
     eyebrow: 'Readiness updates',
-    title: 'Turn a detected change into the right field action.',
+    title: 'Turn a detected change into an updated resource.',
     body:
-      'Canon explains what changed, why it matters, who needs to know, and the action that should happen before outdated context reaches a customer.',
+      'Canon explains what changed in your product, pricing, messaging, or process, maps the roles and resources it affects, and helps prepare the right update for review.',
     image: '/readiness.png',
     alt: 'Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action.',
-    bullets: ['Change and impact detection', 'Role-specific audience targeting', 'Recommended action and delivery'],
+    bullets: ['Change and impact detection', 'Affected roles and resources', 'Update preparation and review'],
     accent: 'amber',
   },
   {
@@ -198,7 +199,7 @@ const faqItems = [
   {
     question: 'What does Canon actually do?',
     answer:
-      'Canon connects to the context your team already creates, turns it into role-specific ramp plans and meeting briefings, detects readiness gaps, and checks for evidence that people can do the work. The next action is routed through the communication tool your team already uses so readiness stays part of the daily workflow.',
+      'Canon builds role-specific ramp plans for new hires, prepares meeting briefings, detects product, pricing, messaging, and process changes, shows who and what they affect, and helps prepare the right resource update for manager review or handoff.',
   },
   {
     question: 'Who is Canon built for?',
@@ -260,19 +261,19 @@ export default function LandingPage() {
             <div className="max-w-[39rem]">
               <div className="hero-kicker" style={{ animation: 'fade-up 0.55s ease 0.05s both' }}>
                 <span className="hero-kicker-dot" />
-                Readiness system for Technical GTM
+                Readiness for technical go-to-market teams
               </div>
 
               <h1 className="type-landing-hero mt-6" style={{ animation: 'fade-up 0.6s ease 0.13s both' }}>
-                Turn what changed into{' '}
-                <span className="text-gradient-purple">what your team does next.</span>
+                Keep your technical GTM team ready for{' '}
+                <span className="text-gradient-purple">every customer conversation.</span>
               </h1>
 
               <p
                 className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
                 style={{ animation: 'fade-up 0.6s ease 0.21s both' }}
               >
-                Canon turns live team context into ramp plans, meeting briefings, and verified readiness. Then it routes the next action through the communication tool your team already uses.
+                Canon builds role-specific ramp plans for new hires, detects product, pricing, messaging, and process changes, and helps update the resources your team uses.
               </p>
 
               <div
@@ -280,20 +281,21 @@ export default function LandingPage() {
                 style={{ animation: 'fade-up 0.6s ease 0.29s both' }}
               >
                 <Button size="lg" className="btn-primary-shimmer" asChild>
-                  <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
-                    Get access
+                  <a href={demoHref} target="_blank" rel="noopener noreferrer">
+                    Book a demo
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
+                {/* Secondary product-tour CTA intentionally hidden while demos are the primary conversion path.
                 <Button size="lg" variant="secondary" asChild>
                   <a href="#product-tour">Explore the product</a>
-                </Button>
+                </Button> */}
               </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-[var(--text-tertiary)]" style={{ animation: 'fade-up 0.6s ease 0.37s both' }}>
-                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Role-specific</span>
-                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Evidence-aware</span>
-                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Manager-controlled</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Faster ramp</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Change detection</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Manager review</span>
               </div>
             </div>
 
@@ -312,32 +314,38 @@ export default function LandingPage() {
                   </span>
                 </div>
 
-                <div className="hero-media-stage">
-                  <Image
-                    src="/readiness.png"
-                    alt="Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action."
-                    width={1920}
-                    height={1440}
-                    className="h-full w-full object-cover"
-                    priority
-                  />
+                <div className="hero-media-footer">
+                  <span>Change detected</span>
+                  <span className="hero-media-line" />
+                  <span>Impact mapped</span>
+                  <span className="hero-media-line" />
+                  <span>Action ready</span>
                 </div>
 
-                <div className="hero-media-footer">
-                  <span>Signal detected</span>
-                  <span className="hero-media-line" />
-                  <span>Audience identified</span>
-                  <span className="hero-media-line" />
-                  <span>Action routed</span>
+                <div className="hero-media-stage">
+                  <video
+                    autoPlay
+                    controls
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    poster="/readiness.png"
+                    className="h-full w-full object-contain bg-[#0c091b]"
+                    aria-label="Canon product demo showing change detection, impact mapping, and readiness actions."
+                  >
+                    <source src="/videos/canon-demo.mp4" type="video/mp4" />
+                    Your browser does not support embedded video.
+                  </video>
                 </div>
               </div>
               <div className="hero-float-card hero-float-card-left">
                 <Radar className="h-4 w-4 text-[var(--amber-text)]" />
-                <span><strong>Readiness gap</strong><small>3 roles affected</small></span>
+                <span><strong>Change detected</strong><small>Packaging update</small></span>
               </div>
               <div className="hero-float-card hero-float-card-right">
                 <CircleCheck className="h-4 w-4 text-[var(--green-text)]" />
-                <span><strong>Evidence found</strong><small>Manager review ready</small></span>
+                <span><strong>Update ready</strong><small>Action ready</small></span>
               </div>
             </div>
           </div>
@@ -391,7 +399,7 @@ export default function LandingPage() {
               <SectionHeading
                 eyebrow="Inside Canon"
                 title="One system for the full readiness lifecycle."
-                body="Start with the ramp. Stay for every change, meeting, milestone, and proof point after it."
+                body="Start with a faster ramp. Stay current as product, pricing, messaging, and process changes affect the team."
               />
             </AnimateIn>
 
@@ -434,13 +442,13 @@ export default function LandingPage() {
               <div className="final-cta-grid pointer-events-none absolute inset-0" />
               <div className="relative flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-2xl">
-                  <p className="section-eyebrow text-[var(--canon-purple-bright)]">Ready when your team is</p>
-                  <h2 className="mt-4 text-2xl font-medium tracking-[-0.02em] sm:text-3xl">Give your next customer moment a clearer path.</h2>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">See how Canon turns the context your team already creates into practical readiness work.</p>
+                  <p className="section-eyebrow text-[var(--canon-purple-bright)]">Ramp and readiness</p>
+                  <h2 className="mt-4 text-2xl font-medium tracking-[-0.02em] sm:text-3xl">Get new hires productive, then keep the team current.</h2>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Canon builds role-specific ramp plans, detects product and process changes, and helps prepare the right resource for manager review.</p>
                 </div>
                 <Button size="lg" className="btn-primary-shimmer shrink-0 self-start md:self-center" asChild>
-                  <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">
-                    Get access
+                  <a href={demoHref} target="_blank" rel="noopener noreferrer">
+                    Book a demo
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
@@ -572,14 +580,15 @@ export default function LandingPage() {
             <div className="final-cta mx-auto max-w-[88rem]">
               <div className="final-cta-grid pointer-events-none absolute inset-0" />
               <div className="relative max-w-3xl">
-                <p className="section-eyebrow text-[var(--canon-purple-bright)]">Keep the field current</p>
-                <h2 className="type-landing-h2 mt-4">Your product will keep changing. Your team can keep up.</h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-[var(--text-secondary)]">Build the readiness loop once. Let Canon keep it moving.</p>
+                <p className="section-eyebrow text-[var(--canon-purple-bright)]">Faster ramp, current team</p>
+                <h2 className="type-landing-h2 mt-4">Get people productive. Keep the work up to date.</h2>
+                <p className="mt-5 max-w-xl text-base leading-7 text-[var(--text-secondary)]">Canon connects new-hire ramping with change detection, impact mapping, and manager review.</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button size="lg" className="btn-primary-shimmer" asChild>
-                    <a href={requestAccessHref} target="_blank" rel="noopener noreferrer">Get access <ArrowRight className="h-4 w-4" /></a>
+                    <a href={demoHref} target="_blank" rel="noopener noreferrer">Book a demo <ArrowRight className="h-4 w-4" /></a>
                   </Button>
-                  <Button size="lg" variant="secondary" asChild><a href="#product-tour">See how it works</a></Button>
+                  {/* Secondary product-tour CTA intentionally hidden while demos are the primary conversion path.
+                  <Button size="lg" variant="secondary" asChild><a href="#product-tour">See how it works</a></Button> */}
                 </div>
               </div>
               <div className="final-cta-orbit" aria-hidden="true">
@@ -602,7 +611,7 @@ export default function LandingPage() {
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--text-tertiary)]">
             <a className="transition-colors hover:text-[var(--text-primary)]" href="mailto:john@usecanon.com">Contact</a>
-            <a className="transition-colors hover:text-[var(--text-primary)]" href={requestAccessHref} target="_blank" rel="noopener noreferrer">Sign in</a>
+            <a className="transition-colors hover:text-[var(--text-primary)]" href={appHref} target="_blank" rel="noopener noreferrer">Sign in</a>
             <span>© 2026 Canon</span>
           </div>
         </div>
