@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const appHref = 'https://app.usecanon.com';
 const demoHref = 'https://calendar.app.google/fjxUSvLSQrHvkMKA8';
+const productAccessEnabled = false;
 const topVisibilityThreshold = 64;
 const hideAfterScrollPosition = 160;
 const hideAfterDownwardDistance = 24;
@@ -116,9 +117,11 @@ export function Navigation() {
 
         {/* Desktop CTAs */}
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="secondary" size="sm" asChild>
-            <a href={appHref} target="_blank" rel="noopener noreferrer">Sign In</a>
-          </Button>
+          {productAccessEnabled ? (
+            <Button variant="secondary" size="sm" asChild>
+              <a href={appHref} target="_blank" rel="noopener noreferrer">Sign In</a>
+            </Button>
+          ) : null}
           <Button size="sm" asChild>
             <a href={demoHref} target="_blank" rel="noopener noreferrer">
               Book a Demo
@@ -161,11 +164,13 @@ export function Navigation() {
             ))}
           </nav>
           <div className="mt-3 flex flex-col gap-2">
-            <Button variant="secondary" className="w-full justify-start" asChild>
-              <a href={appHref} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
-                Sign In
-              </a>
-            </Button>
+            {productAccessEnabled ? (
+              <Button variant="secondary" className="w-full justify-start" asChild>
+                <a href={appHref} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
+                  Sign In
+                </a>
+              </Button>
+            ) : null}
             <Button className="w-full" asChild>
               <a href={demoHref} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
                 Book a Demo

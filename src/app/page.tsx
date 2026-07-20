@@ -27,6 +27,7 @@ import { Button } from '@/components/ui/button';
 
 const appHref = 'https://app.usecanon.com';
 const demoHref = 'https://calendar.app.google/fjxUSvLSQrHvkMKA8';
+const productAccessEnabled = false;
 const inner = 'mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8';
 
 export const metadata: Metadata = {
@@ -200,7 +201,7 @@ const faqItems = [
   {
     question: 'What does Canon actually do?',
     answer:
-      'Canon builds role-specific ramp plans for new hires, prepares meeting briefings, detects product, pricing, messaging, and process changes, shows who and what they affect, and helps prepare the right resource update for manager review or handoff.',
+      'Canon builds role-specific ramp plans for new hires, prepares meeting briefings, keeps your team ready as GTM changes reach customers, and helps managers review the right updates.',
   },
   {
     question: 'Who is Canon built for?',
@@ -258,7 +259,7 @@ export default function LandingPage() {
           <div className="hero-grid pointer-events-none absolute inset-0" />
           <div className="hero-ambient pointer-events-none absolute inset-0" />
 
-          <div className={`${inner} relative grid min-h-[calc(100svh-65px)] items-center gap-12 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14 lg:py-20`}>
+          <div className={`${inner} relative grid min-h-[calc(100svh-65px-72px)] items-center gap-12 py-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14`}>
             <div className="max-w-[39rem]">
               <div className="hero-kicker" style={{ animation: 'fade-up 0.55s ease 0.05s both' }}>
                 <span className="hero-kicker-dot" />
@@ -274,7 +275,7 @@ export default function LandingPage() {
                 className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
                 style={{ animation: 'fade-up 0.6s ease 0.21s both' }}
               >
-                Canon builds role-specific ramp plans for new hires, detects product, pricing, messaging, and process changes, and helps update the resources your team uses.
+                Canon builds role-specific ramp plans for new hires and keeps your team ready for customer conversations that build trust.
               </p>
 
               <div
@@ -347,17 +348,20 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </section>
 
-        <section className="border-y border-[var(--border-tertiary)] bg-[var(--bg-tertiary)]" aria-label="Current integrations">
-          <div className={`${inner} flex flex-col items-center justify-between gap-5 py-6 md:flex-row`}>
-            <p className="text-sm text-[var(--text-secondary)]">Built around the tools your team already uses.</p>
-            <div className="flex flex-wrap items-center justify-center gap-2.5 md:justify-end">
-              {integrations.map((integration) => (
-                <IntegrationPill key={integration.provider} provider={integration.provider} name={integration.name} />
-              ))}
+          <section
+            className="relative border-y border-[var(--border-tertiary)] bg-[rgba(241,238,248,0.88)] backdrop-blur-sm"
+            aria-label="Current integrations"
+          >
+            <div className={`${inner} flex flex-col items-center justify-between gap-4 py-4 md:flex-row md:py-5`}>
+              <p className="text-sm text-[var(--text-secondary)]">Built around the tools your team already uses.</p>
+              <div className="flex flex-wrap items-center justify-center gap-2.5 md:justify-end">
+                {integrations.map((integration) => (
+                  <IntegrationPill key={integration.provider} provider={integration.provider} name={integration.name} />
+                ))}
+              </div>
             </div>
-          </div>
+          </section>
         </section>
 
         <section className="section-shell" id="how-it-works">
@@ -604,8 +608,10 @@ export default function LandingPage() {
         <div className={`${inner} flex flex-col items-start justify-between gap-5 py-7 sm:flex-row sm:items-center`}>
           <BrandMark />
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--text-tertiary)]">
-            <a className="transition-colors hover:text-[var(--text-primary)]" href="mailto:john@usecanon.com">Contact</a>
-            <a className="transition-colors hover:text-[var(--text-primary)]" href={appHref} target="_blank" rel="noopener noreferrer">Sign in</a>
+            <a className="transition-colors hover:text-[var(--text-primary)]" href={demoHref} target="_blank" rel="noopener noreferrer">Book a demo</a>
+            {productAccessEnabled ? (
+              <a className="transition-colors hover:text-[var(--text-primary)]" href={appHref} target="_blank" rel="noopener noreferrer">Sign in</a>
+            ) : null}
             <span>© 2026 Canon</span>
           </div>
         </div>
