@@ -749,6 +749,92 @@ button {
 .orbit-node-two { right: 1.1rem; top: 0.6rem; }
 .orbit-node-three { bottom: 0.8rem; right: 1.5rem; }
 
+@media (min-width: 1024px) and (max-height: 840px) {
+  .hero-main {
+    min-height: calc(100svh - 65px - 56px);
+    gap: clamp(1.75rem, 3vw, 2.75rem);
+    padding-block: clamp(1.25rem, 2.8vh, 2rem);
+  }
+
+  .hero-main-copy {
+    max-width: 36.5rem;
+  }
+
+  .hero-main .type-landing-hero {
+    font-size: clamp(2.7rem, 4.45vw, 4.7rem);
+    line-height: 0.99;
+  }
+
+  .hero-description {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .hero-primary-actions,
+  .hero-benefits {
+    margin-top: 1.35rem;
+  }
+
+  .hero-media {
+    max-width: min(100%, 43rem);
+    margin-left: auto;
+  }
+
+  .hero-media-bar {
+    height: 2.35rem;
+  }
+
+  .hero-media-footer {
+    min-height: 2.6rem;
+    padding-inline: 0.85rem;
+  }
+
+  .hero-float-card {
+    padding: 0.62rem 0.72rem;
+  }
+
+  .hero-float-card-left {
+    bottom: 10%;
+  }
+
+  .hero-float-card-right {
+    top: 18%;
+  }
+
+  .hero-integration-strip {
+    gap: 0.65rem;
+    padding-block: 0.7rem;
+  }
+
+  .integration-pill {
+    padding: 0.38rem 0.66rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 740px) {
+  .hero-main {
+    padding-block: 1rem;
+  }
+
+  .hero-main .type-landing-hero {
+    font-size: clamp(2.45rem, 4.1vw, 4.1rem);
+  }
+
+  .hero-kicker {
+    padding: 0.33rem 0.65rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .hero-media {
+    max-width: min(100%, 39.5rem);
+  }
+}
+
 @media (max-width: 1180px) {
   .operating-loop { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .operating-loop::before { display: none; }

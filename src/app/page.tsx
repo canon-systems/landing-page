@@ -31,19 +31,19 @@ const productAccessEnabled = false;
 const inner = 'mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8';
 
 export const metadata: Metadata = {
-  title: 'Readiness That Keeps Up With Your Product',
+  title: 'Customer Conversation Readiness for Technical Teams',
   description:
-    'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
+    'Canon helps customer-facing technical teams turn product changes and customer context into meeting prep, follow-up actions, and faster new-hire ramp.',
   openGraph: {
-    title: 'Canon | Readiness that keeps up with your product',
+    title: 'Canon | Customer conversation readiness',
     description:
-      'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
+      'Canon helps customer-facing technical teams turn product changes and customer context into meeting prep, follow-up actions, and faster new-hire ramp.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Canon | Readiness that keeps up with your product',
+    title: 'Canon | Customer conversation readiness',
     description:
-      'Canon helps technical go-to-market teams ramp new hires faster, detect change, and keep the right resources current.',
+      'Canon helps customer-facing technical teams turn product changes and customer context into meeting prep, follow-up actions, and faster new-hire ramp.',
   },
 };
 
@@ -58,35 +58,35 @@ const integrations: Array<{
       provider: 'granola',
       name: 'Granola',
       role: 'Meeting context',
-      description: 'Turn meeting notes and transcripts into customer themes, proof, and follow-up context.',
+      description: 'Use meeting notes and transcripts to spot customer themes, proof, and follow-up needs.',
       tone: 'integration-granola',
     },
     {
       provider: 'gmail',
       name: 'Gmail',
       role: 'Email context',
-      description: 'Connect the customer and team conversations that shape the work ahead.',
+      description: 'Bring in the customer and team emails that shape each account.',
       tone: 'integration-gmail',
     },
     {
       provider: 'google_calendar',
       name: 'Google Calendar',
       role: 'Upcoming work',
-      description: 'Know which meetings are next, who is involved, and when a briefing is needed.',
+      description: 'See which meetings are next, who is involved, and when a briefing is needed.',
       tone: 'integration-calendar',
     },
     {
       provider: 'outlook',
       name: 'Outlook Calendar',
       role: 'Meeting timing',
-      description: 'Prepare people for upcoming meetings across Microsoft calendars.',
+      description: 'Prepare teams for upcoming meetings across Microsoft calendars.',
       tone: 'integration-outlook',
     },
     {
       provider: 'slack',
       name: 'Slack',
       role: 'Communication + delivery',
-      description: 'Bring in team context and route the next action to the communication space your team already uses.',
+      description: 'Read team context and route next steps where your team already works.',
       tone: 'integration-slack',
     },
   ];
@@ -95,31 +95,31 @@ const operatingLoop = [
   {
     number: '01',
     title: 'Connect context',
-    body: 'Choose the conversations, meetings, email, and calendars Canon should learn from.',
+    body: 'Choose the chats, meetings, emails, and calendars Canon can use.',
     icon: BrainCircuit,
   },
   {
     number: '02',
-    title: 'Shape the path',
-    body: 'Turn company context into role-specific learning steps, success signals, and ramp timing.',
+    title: 'Build the ramp',
+    body: 'Create role-specific learning steps and tool-access reminders for each new hire.',
     icon: Flag,
   },
   {
     number: '03',
-    title: 'Prepare the moment',
-    body: 'Brief people before the meeting, milestone, or customer situation where readiness matters.',
+    title: 'Prep the meeting',
+    body: 'Send the right context before customer calls, onboarding sessions, or renewals.',
     icon: CalendarDays,
   },
   {
     number: '04',
-    title: 'Find the proof',
-    body: 'Check connected activity for evidence and send uncertain proof to a manager for review.',
+    title: 'Verify the work',
+    body: 'Look for proof in connected activity and ask a manager to review anything uncertain.',
     icon: FileCheck2,
   },
   {
     number: '05',
-    title: 'Route what is next',
-    body: 'Deliver the right update or action to the right person in the communication tool your team already uses, then keep the loop moving.',
+    title: 'Send the action',
+    body: 'Route updates, access requests, and follow-ups to the right person in the tools they already use.',
     icon: Zap,
   },
 ];
@@ -127,39 +127,39 @@ const operatingLoop = [
 const productStories = [
   {
     eyebrow: 'Hire paths',
-    title: 'Get new hires productive faster.',
+    title: 'Ramp new customer-facing technical hires faster.',
     body:
-      'Canon gives each hire a role-specific path with timed learning steps, tool access, evidence checks, and manager review.',
+      'Canon turns the role, tools, and company context into a clear path for each new customer-facing technical hire.',
     image: '/pictures/new_hire.png',
     alt: 'Canon Hire Paths showing Maya Chen’s AI Solutions Architect ramp, milestone progress, Canon Checks, and proof of progress.',
-    bullets: ['Role-specific paths and ramp timing', 'Live Canon Checks and evidence status', 'Tool access and manager review'],
+    bullets: ['Role-specific ramp paths', 'Evidence checks from real work', 'Tool access and manager review'],
     accent: 'purple',
   },
   {
     eyebrow: 'Milestones + evidence',
-    title: 'Turn role expectations into an approved readiness plan.',
+    title: 'Make expectations clear before work starts.',
     body:
-      'Define the trigger, proof, timing, and dependency behind each learning step so managers can see what real progress should look like.',
+      'Define the trigger, proof, timing, and dependency behind each step so managers know what real progress should look like.',
     image: '/pictures/milestones.png',
     alt: 'Canon Milestones showing the AI Solutions Architect approved plan with timed learning steps, triggers, proof requirements, and dependencies.',
-    bullets: ['Generated role plans with human approval', 'Real-work triggers and dependencies', 'Clear proof requirements'],
+    bullets: ['Generated plans with human approval', 'Real-work triggers and dependencies', 'Clear proof requirements'],
     accent: 'green',
   },
   {
     eyebrow: 'Readiness updates',
-    title: 'Turn a detected change into an updated resource.',
+    title: 'Keep answers current as the product changes.',
     body:
-      'Canon explains what changed in your product, pricing, messaging, or process, maps the roles and resources it affects, and helps prepare the right update for review.',
+      'Canon spots product, pricing, messaging, and process changes, then shows which roles and resources need an update before customers hear stale answers.',
     image: '/pictures/readiness.png',
-    alt: 'Canon Readiness showing an enterprise packaging change, affected technical roles, impact, and a recommended action.',
-    bullets: ['Change and impact detection', 'Affected roles and resources', 'Update preparation and review'],
+    alt: 'Canon Readiness showing an enterprise packaging change, affected customer-facing technical roles, impact, and a recommended action.',
+    bullets: ['Change and impact detection', 'Affected roles and resources', 'Updates ready for review'],
     accent: 'amber',
   },
   {
     eyebrow: 'Meeting briefings',
-    title: 'Prepare the team before the next customer meeting.',
+    title: 'Walk into customer meetings with the latest context.',
     body:
-      'The Briefings pane watches the connected calendar, surfaces upcoming meetings, and tracks whether each briefing is waiting, delivered, or needs attention.',
+      'Canon watches the connected calendar, finds the meetings that need prep, and tracks whether each briefing is waiting, delivered, or needs attention.',
     image: '/pictures/briefing.png',
     alt: 'Canon Meeting Briefings showing an Outlook Calendar connection, an upcoming customer meeting, delivered briefings, and one item needing attention.',
     bullets: ['Connected calendar awareness', 'Upcoming meeting preparation', 'Waiting, delivered, and attention states'],
@@ -167,9 +167,9 @@ const productStories = [
   },
   {
     eyebrow: 'Knowledge',
-    title: 'Keep the source material behind every recommendation visible.',
+    title: 'Show where every recommendation comes from.',
     body:
-      'Canon shows the meeting libraries and team context it can use, how much knowledge is ready, and when each source was last updated.',
+      'Canon shows the meeting libraries and team context it can use, how much is ready, and when each source was last updated.',
     image: '/pictures/knowledge.png',
     alt: 'Canon Knowledge showing three active Granola sources and 141 items ready for Canon to use.',
     bullets: ['Source health and update history', 'Customer and product context in one place', 'Clear visibility into what Canon can use'],
@@ -177,19 +177,19 @@ const productStories = [
   },
   {
     eyebrow: 'Roles + tools',
-    title: 'Give every role the tools and context it needs to operate.',
+    title: 'Map each role to its tools and owners.',
     body:
-      'Canon keeps role expectations and the systems behind them together, so every hire starts with the right access path and a clear owner.',
+      'Canon keeps role expectations and required systems together, so every hire starts with the right access path and a clear owner.',
     image: '/pictures/roles.png',
-    alt: 'Canon Settings showing the Roles & Tools catalog with three Technical GTM roles and their configured tools.',
-    bullets: ['Role-specific tool mapping', 'Clear owners for every request', 'One readiness foundation'],
+    alt: 'Canon Settings showing the Roles & Tools catalog with customer-facing technical roles and their configured tools.',
+    bullets: ['Role-specific tool mapping', 'Clear owners for every request', 'One foundation for readiness'],
     accent: 'amber',
   },
   {
     eyebrow: 'Communication delivery',
-    title: 'Put the next readiness action where the team already works.',
+    title: 'Send the next action where work already happens.',
     body:
-      'Canon routes access requests and follow-up actions into connected communication tools with the right context and a manager-controlled approval path. The current visual shows one example of that flow in Slack.',
+      'Canon routes access requests and follow-up actions into connected communication tools with the right context and a manager-controlled approval path.',
     image: '/pictures/slack_delivery.png',
     alt: 'Canon’s Slack delivery surface showing access requests with links to Zoom, Gong, and GitHub and manager approval actions.',
     bullets: ['Context-rich access requests', 'Deep links to the work', 'Manager-controlled approvals'],
@@ -201,12 +201,12 @@ const faqItems = [
   {
     question: 'What does Canon actually do?',
     answer:
-      'Canon builds role-specific ramp plans for new hires, prepares meeting briefings, keeps your team ready as GTM changes reach customers, and helps managers review the right updates.',
+      'Canon keeps customer-facing technical teams ready. It creates new-hire ramp paths, prepares meeting briefings, detects changes that affect customers, and sends updates or review requests to the right manager.',
   },
   {
     question: 'Who is Canon built for?',
     answer:
-      'Canon is built for Technical GTM teams, including Solutions Engineers, Solutions Architects, Implementation roles, Technical Account Managers, and the leaders responsible for getting them ready for customer work.',
+      'Canon is built for pre-sales and post-sales technical teams and the leaders responsible for customer readiness. That includes any role that helps customers evaluate, adopt, or get value from your product.',
   },
   {
     question: 'Which tools does Canon connect with today?',
@@ -216,7 +216,7 @@ const faqItems = [
   {
     question: 'Does Canon replace our LMS or CRM?',
     answer:
-      'No. Canon focuses on the readiness loop between changing company context and customer-facing work. It complements the systems you already use by preparing people for real work and showing whether the right capability is present.',
+      'No. Canon focuses on the readiness loop between changing company context and customer-facing technical work. It complements the systems you already use by preparing people for real work and showing whether the right capability is present.',
   },
 ] as const;
 
@@ -259,27 +259,27 @@ export default function LandingPage() {
           <div className="hero-grid pointer-events-none absolute inset-0" />
           <div className="hero-ambient pointer-events-none absolute inset-0" />
 
-          <div className={`${inner} relative grid min-h-[calc(100svh-65px-72px)] items-center gap-12 py-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14`}>
-            <div className="max-w-[39rem]">
+          <div className={`${inner} hero-main relative grid min-h-[calc(100svh-65px-72px)] items-center gap-12 py-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14`}>
+            <div className="hero-main-copy max-w-[39rem]">
               <div className="hero-kicker" style={{ animation: 'fade-up 0.55s ease 0.05s both' }}>
                 <span className="hero-kicker-dot" />
-                Readiness for technical go-to-market teams
+                Customer conversation readiness
               </div>
 
               <h1 className="type-landing-hero mt-6" style={{ animation: 'fade-up 0.6s ease 0.13s both' }}>
-                Keep your technical GTM team ready for{' '}
+                Keep customer-facing technical teams ready for{' '}
                 <span className="text-gradient-purple">every customer conversation.</span>
               </h1>
 
               <p
-                className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
+                className="hero-description mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
                 style={{ animation: 'fade-up 0.6s ease 0.21s both' }}
               >
-                Canon builds role-specific ramp plans for new hires and keeps your team ready for customer conversations that build trust.
+                Canon turns product changes, customer signals, and internal know-how into meeting prep, follow-up actions, and ramp plans for the people who bring technical expertise into customer conversations.
               </p>
 
               <div
-                className="mt-8 flex flex-col gap-3 sm:flex-row"
+                className="hero-primary-actions mt-8 flex flex-col gap-3 sm:flex-row"
                 style={{ animation: 'fade-up 0.6s ease 0.29s both' }}
               >
                 <Button size="lg" className="btn-primary-shimmer" asChild>
@@ -294,10 +294,10 @@ export default function LandingPage() {
                 </Button> */}
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-[var(--text-tertiary)]" style={{ animation: 'fade-up 0.6s ease 0.37s both' }}>
-                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Faster ramp</span>
+              <div className="hero-benefits mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-[var(--text-tertiary)]" style={{ animation: 'fade-up 0.6s ease 0.37s both' }}>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Meeting prep</span>
                 <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Change detection</span>
-                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Manager review</span>
+                <span className="inline-flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[var(--green-text)]" />Faster ramp</span>
               </div>
             </div>
 
@@ -317,11 +317,11 @@ export default function LandingPage() {
                 </div>
 
                 <div className="hero-media-footer">
-                  <span>Change detected</span>
+                  <span>Context found</span>
                   <span className="hero-media-line" />
                   <span>Impact mapped</span>
                   <span className="hero-media-line" />
-                  <span>Action ready</span>
+                  <span>Action routed</span>
                 </div>
 
                 <div className="hero-media-stage">
@@ -331,7 +331,7 @@ export default function LandingPage() {
                     playsInline
                     preload="metadata"
                     className="h-full w-full object-contain bg-[#0c091b]"
-                    aria-label="Canon product demo showing change detection, impact mapping, and readiness actions."
+                    aria-label="Canon product demo showing context detection, impact mapping, and routed readiness actions."
                   >
                     <source src="/videos/canon-demo.mp4" type="video/mp4" />
                     Your browser does not support embedded video.
@@ -344,7 +344,7 @@ export default function LandingPage() {
               </div>
               <div className="hero-float-card hero-float-card-right">
                 <CircleCheck className="h-4 w-4 text-[var(--green-text)]" />
-                <span><strong>Update ready</strong><small>Action ready</small></span>
+                <span><strong>Update ready</strong><small>Ready for review</small></span>
               </div>
             </div>
           </div>
@@ -353,8 +353,8 @@ export default function LandingPage() {
             className="relative border-y border-[var(--border-tertiary)] bg-[rgba(241,238,248,0.88)] backdrop-blur-sm"
             aria-label="Current integrations"
           >
-            <div className={`${inner} flex flex-col items-center justify-between gap-4 py-4 md:flex-row md:py-5`}>
-              <p className="text-sm text-[var(--text-secondary)]">Built around the tools your team already uses.</p>
+            <div className={`${inner} hero-integration-strip flex flex-col items-center justify-between gap-4 py-4 md:flex-row md:py-5`}>
+              <p className="text-sm text-[var(--text-secondary)]">Works with the tools your team already uses.</p>
               <div className="flex flex-wrap items-center justify-center gap-2.5 md:justify-end">
                 {integrations.map((integration) => (
                   <IntegrationPill key={integration.provider} provider={integration.provider} name={integration.name} />
@@ -368,9 +368,9 @@ export default function LandingPage() {
           <div className={inner}>
             <AnimateIn>
               <SectionHeading
-                eyebrow="One operating loop"
-                title="From scattered context to verified action."
-                body="Canon closes the gap between what your company knows and what your customer-facing team does next."
+                eyebrow="How Canon works"
+                title="From scattered context to the next right action."
+                body="Canon turns chats, meetings, email, and calendars into prep and updates for customer-facing technical teams."
                 align="center"
               />
             </AnimateIn>
@@ -400,8 +400,8 @@ export default function LandingPage() {
             <AnimateIn>
               <SectionHeading
                 eyebrow="Inside Canon"
-                title="One system for the full readiness lifecycle."
-                body="Start with a faster ramp. Stay current as product, pricing, messaging, and process changes affect the team."
+                title="A readiness system for the customer journey."
+                body="Help new hires ramp faster. Keep experienced teams current as product, pricing, messaging, and process change."
               />
             </AnimateIn>
 
@@ -444,9 +444,9 @@ export default function LandingPage() {
               <div className="final-cta-grid pointer-events-none absolute inset-0" />
               <div className="relative flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-2xl">
-                  <p className="section-eyebrow text-[var(--canon-purple-bright)]">Ramp and readiness</p>
-                  <h2 className="mt-4 text-2xl font-medium tracking-[-0.02em] sm:text-3xl">Get new hires productive, then keep the team current.</h2>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Canon builds role-specific ramp plans, detects product and process changes, and helps prepare the right resource for manager review.</p>
+                  <p className="section-eyebrow text-[var(--canon-purple-bright)]">Customer-facing technical teams</p>
+                  <h2 className="mt-4 text-2xl font-medium tracking-[-0.02em] sm:text-3xl">Ramp new hires faster. Keep every answer current.</h2>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Canon builds role-specific ramp plans, detects changes that affect customer conversations, and prepares updates for manager review.</p>
                 </div>
                 <Button size="lg" className="btn-primary-shimmer shrink-0 self-start md:self-center" asChild>
                   <a href={demoHref} target="_blank" rel="noopener noreferrer">
@@ -464,9 +464,9 @@ export default function LandingPage() {
             <AnimateIn>
               <div>
                 <p className="section-eyebrow">Proof, not progress bars</p>
-                <h2 id="proof-title" className="type-landing-h2 mt-4">Readiness should show up in the work.</h2>
+                <h2 id="proof-title" className="type-landing-h2 mt-4">Readiness should be visible in real work.</h2>
                 <p className="mt-5 text-base leading-7 text-[var(--text-secondary)]">
-                  Canon Checks looks for evidence across connected activity, flags uncertain proof, and keeps the manager in control of the final call.
+                  Canon Checks looks for evidence in connected activity, flags anything unclear, and keeps managers in control of the final call.
                 </p>
                 <div className="mt-8 grid grid-cols-2 gap-3">
                   <div className="mini-proof-card"><strong>Automatic</strong><span>Evidence scan</span></div>
@@ -480,7 +480,7 @@ export default function LandingPage() {
                 <div className="proof-panel-head">
                   <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Canon Check</p>
-                    <h3 className="mt-2 text-base font-medium">Run a customer discovery call</h3>
+                    <h3 className="mt-2 text-base font-medium">Run a technical discovery call</h3>
                   </div>
                   <span className="proof-status"><Clock3 className="h-3.5 w-3.5" />Reviewing</span>
                 </div>
@@ -492,7 +492,7 @@ export default function LandingPage() {
                   </div>
                   <div className="proof-step is-complete">
                     <span className="proof-step-icon"><ShieldCheck className="h-4 w-4" /></span>
-                    <div><strong>Tool access confirmed</strong><small>Required customer tools are ready</small></div>
+                    <div><strong>Tool access confirmed</strong><small>Required meeting tools are ready</small></div>
                     <CircleCheck className="ml-auto h-4 w-4 text-[var(--green-text)]" />
                   </div>
                   <div className="proof-step is-review">
@@ -516,8 +516,8 @@ export default function LandingPage() {
             <AnimateIn>
               <SectionHeading
                 eyebrow="Connected context"
-                title="Your tools already know what changed. Canon turns it into action."
-                body="Each connection has a clear job in the readiness loop: context in, the right next step out."
+                title="Your tools already know what changed. Canon turns that context into action."
+                body="Each connection has a clear job: bring context in, send the right next step out."
               />
             </AnimateIn>
 
@@ -570,7 +570,7 @@ export default function LandingPage() {
               <div>
                 <p className="section-eyebrow">Questions</p>
                 <h2 className="type-landing-h2 mt-4">The short version.</h2>
-                <p className="mt-5 text-sm leading-7 text-[var(--text-secondary)]">Canon is focused on a simple outcome: make the next customer-facing action the right one.</p>
+                <p className="mt-5 text-sm leading-7 text-[var(--text-secondary)]">Canon is focused on a simple outcome: help the technical people closest to customers show up with the latest answer.</p>
               </div>
             </AnimateIn>
             <AnimateIn delay={80}><FaqAccordion items={faqItems} /></AnimateIn>
@@ -582,9 +582,9 @@ export default function LandingPage() {
             <div className="final-cta mx-auto max-w-[88rem]">
               <div className="final-cta-grid pointer-events-none absolute inset-0" />
               <div className="relative max-w-3xl">
-                <p className="section-eyebrow text-[var(--canon-purple-bright)]">Faster ramp, current team</p>
-                <h2 className="type-landing-h2 mt-4">Get people productive. Keep the work up to date.</h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-[var(--text-secondary)]">Canon connects new-hire ramping with change detection, impact mapping, and manager review.</p>
+                <p className="section-eyebrow text-[var(--canon-purple-bright)]">Customer conversation readiness</p>
+                <h2 className="type-landing-h2 mt-4">Stop walking into customer meetings with two-week-old answers.</h2>
+                <p className="mt-5 max-w-xl text-base leading-7 text-[var(--text-secondary)]">Canon keeps the people who bring technical expertise into customer conversations current as your product and customers change.</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button size="lg" className="btn-primary-shimmer" asChild>
                     <a href={demoHref} target="_blank" rel="noopener noreferrer">Book a demo <ArrowRight className="h-4 w-4" /></a>

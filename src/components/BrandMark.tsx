@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const readinessLabel = 'Technical GTM readiness';
+const readinessLabel = 'Customer conversation readiness';
 
 type BrandMarkProps = {
   href?: string;

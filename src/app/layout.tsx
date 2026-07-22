@@ -5,11 +5,11 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://usecanon.com'),
   title: {
-    default: 'Canon | Technical GTM Readiness',
+    default: 'Canon | Customer Conversation Readiness',
     template: '%s | Canon',
   },
   description:
-    'Turn changing company context into role-specific ramp plans, meeting briefings, readiness actions, and verified progress.',
+    'Turn product changes and customer context into meeting prep, follow-up actions, and faster ramp for customer-facing technical teams.',
 };
 
 export default function RootLayout({
